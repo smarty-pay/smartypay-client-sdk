@@ -23,7 +23,7 @@ jobs:
         node-version: '12'
         cache: 'npm'
     - run: npm install
-    - run: npm docs
+    - run: npm run docs
 
     - run: touch docs/.nojekyll
     - name: Deploy docs 🚀

@@ -16,7 +16,7 @@
     "test": "jest",
     "clean": "rm -rf dist build package",
     "docs": "typedoc --entryPoints src/main.ts",
-    "build": "npm clean && npm esbuild-browser",
+    "build": "npm run clean && npm run esbuild-browser",
     "esbuild-browser": "esbuild src/payment-button.ts --bundle --minify --sourcemap=external --outfile=dist/esbuild/payment-button.js",
     "esbuild-browser:dev": "esbuild src/payment-button.ts --bundle --outfile=dist/esbuild/payment-button.js"
   },
