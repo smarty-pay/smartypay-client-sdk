@@ -15,7 +15,7 @@
     "lint": "eslint src/ --ext .js,.jsx,.ts,.tsx",
     "test": "jest",
     "clean": "rm -rf dist build package",
-    "docs": "typedoc --entryPoints src/payment-button.ts",
+    "docs": "typedoc --entryPoints src/index.ts",
     "build": "npm run clean && npm run esbuild-browser",
     "esbuild-browser": "node ./build.js"
   },

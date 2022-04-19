@@ -7,6 +7,7 @@ async function build(){
 
     // minify css
     await esbuild.build({
+      logLevel: 'info',
       entryPoints: ['src/style.css'],
       minify: true,
       outfile: 'src/style-min.css',
@@ -18,7 +19,8 @@ async function build(){
 
     // make js
     await esbuild.build({
-      entryPoints: ['src/payment-button.ts'],
+      logLevel: 'info',
+      entryPoints: ['src/index.ts'],
       bundle: true,
       minify: true,
       sourcemap: 'external',
@@ -36,7 +38,7 @@ async function build(){
       if(fs.existsSync('src/style.css')){
         fs.unlinkSync('src/style.css');
       }
-      
+
       fs.renameSync('src/style-init.css', 'src/style.css');
     }
   }
