@@ -15,10 +15,11 @@
     "lint": "eslint src/ --ext .js,.jsx,.ts,.tsx",
     "test": "jest",
     "clean": "rm -rf dist build package",
-    "docs": "typedoc --entryPoints src/main.ts",
+    "docs": "typedoc --entryPoints src/payment-button.ts",
     "build": "npm run clean && npm run esbuild-browser",
     "esbuild-browser": "esbuild src/payment-button.ts --bundle --minify --sourcemap=external --outfile=dist/esbuild/payment-button.js",
-    "esbuild-browser:dev": "esbuild src/payment-button.ts --bundle --outfile=dist/esbuild/payment-button.js"
+    "esbuild-browser:dev": "esbuild src/payment-button.ts --bundle --outfile=dist/esbuild/payment-button.js",
+    "esbuild-browser:watch": "esbuild src/payment-button.ts --bundle --watch --sourcemap=external --outfile=dist/esbuild/payment-button.ts"
   },
   "devDependencies": {
     "@types/jest": "^26.0.21",

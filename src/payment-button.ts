@@ -1,10 +1,60 @@
-/**
- * This file is the entrypoint of browser builds.
- * The code executes when loaded in a browser.
- */
-import { foo } from './main'
+
+export interface SmartyPayButtonProps {
+  target?: string,
+  apiKey?: string,
+  token?: string,
+  amount?: string,
+  lang?: string,
+}
+
+
+export class SmartyPayButton {
+
+  constructor(
+    {
+      target,
+      lang: langVal,
+    }: SmartyPayButtonProps
+  ) {
+
+    if( ! target){
+      console.warn('empty target for SmartyPayButton');
+      return;
+    }
+
+    const elem = document.getElementById(target);
+    if( ! elem){
+      console.warn('cannot find element for render SmartyPayButton:', target);
+      return;
+    }
+
+    const lang = parseLang(langVal || navigator.language || '');
+
+    const button = document.createElement('button');
+    button.innerText = label(lang);
+
+    elem.replaceWith(button);
+  }
+
+
+}
+
+function parseLang(lang: string): Lang {
+  if(lang.includes('ru')) return 'ru';
+  if(lang.includes('es')) return 'es';
+  return 'en';
+}
+
+function label(lang: Lang): string {
+  if(lang === 'ru') return 'Оплатить';
+  if(lang === 'es') return 'Pagar';
+  return 'Pay';
+}
+
+
+type Lang = 'en' | 'ru' | 'es';
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
-(window as any).foo = foo  // instead of casting window to any, you can extend the Window interface: https://stackoverflow.com/a/43513740/5433572
+(window as any).SmartyPayButton = SmartyPayButton;
 
-console.log('Method "foo" was added to the window object. You can try it yourself by just entering "await foo()"')
+

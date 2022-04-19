@@ -2,10 +2,19 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8">
-    <script src="./dist/esbuild/payment-button.js"></script>
+
     <!-- <script src="https://cdn.jsdelivr.net/npm/smarty-pay-payment-button"></script> -->
   </head>
   <body>
-    Open the devtools 👇
+
+  <div id="smarty-pay-button"></div>
+  <script src="./dist/esbuild/payment-button.js"></script>
+  <noscript><a href="https://smartypay.io">Web3 Payments</a> are currently not supported without JavaScript enabled.</noscript>
+  <script>
+    new SmartyPayButton({
+      target: 'smarty-pay-button'
+    })
+  </script>
+
   </body>
 </html>
