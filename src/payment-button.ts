@@ -1,3 +1,4 @@
+import {Lang, parseLang} from "./lang";
 
 export interface SmartyPayButtonProps {
   target?: string,
@@ -18,17 +19,17 @@ export class SmartyPayButton {
   ) {
 
     if( ! target){
-      console.warn('empty target for SmartyPayButton');
+      console.warn('cannot find target to render SmartyPayButton');
       return;
     }
 
     const elem = document.getElementById(target);
     if( ! elem){
-      console.warn('cannot find element for render SmartyPayButton:', target);
+      console.warn('cannot find element to render SmartyPayButton:', target);
       return;
     }
 
-    const lang = parseLang(langVal || navigator.language || '');
+    const lang = parseLang(langVal);
 
     const button = document.createElement('button');
     button.innerText = label(lang);
@@ -39,11 +40,6 @@ export class SmartyPayButton {
 
 }
 
-function parseLang(lang: string): Lang {
-  if(lang.includes('ru')) return 'ru';
-  if(lang.includes('es')) return 'es';
-  return 'en';
-}
 
 function label(lang: Lang): string {
   if(lang === 'ru') return 'Оплатить';
@@ -52,7 +48,6 @@ function label(lang: Lang): string {
 }
 
 
-type Lang = 'en' | 'ru' | 'es';
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 (window as any).SmartyPayButton = SmartyPayButton;
