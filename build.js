@@ -1,21 +1,34 @@
 const esbuild = require('esbuild');
 const fs = require('fs');
 
+const cssFile = 'src/assets/style.css';
+const cssFileMin = 'src/assets/style.min.css';
+const cssFileInit = 'src/assets/style.init.css';
+
+const svgFile = 'src/assets/icon.svg';
+const svgFileMin = 'src/assets/icon.min.svg';
+const svgFileInit = 'src/assets/icon.init.svg';
+
 async function build(){
 
   try {
 
+    // minify svg
+    fs.writeFileSync(svgFileMin, fs.readFileSync(svgFile, 'utf-8').split('\n').join(''));
+    fs.renameSync(svgFile, svgFileInit);
+    fs.renameSync(svgFileMin, svgFile);
+
     // minify css
     await esbuild.build({
       logLevel: 'info',
-      entryPoints: ['src/style.css'],
+      entryPoints: [cssFile],
       minify: true,
-      outfile: 'src/style-min.css',
+      outfile: cssFileMin,
     });
 
     // temp replace min css for main build
-    fs.renameSync('src/style.css', 'src/style-init.css');
-    fs.renameSync('src/style-min.css', 'src/style.css');
+    fs.renameSync(cssFile, cssFileInit);
+    fs.renameSync(cssFileMin, cssFile);
 
     // make js
     await esbuild.build({
@@ -26,20 +39,27 @@ async function build(){
       sourcemap: 'external',
       outfile: 'dist/esbuild/payment-button.js',
       loader: {
-        '.css': 'text'
+        '.css': 'text',
+        '.svg': 'text',
       },
     });
 
   } finally {
 
-    // replace css back
-    if(fs.existsSync('src/style-init.css')){
-
-      if(fs.existsSync('src/style.css')){
-        fs.unlinkSync('src/style.css');
+    // replace svg back
+    if(fs.existsSync(svgFileInit)){
+      if(fs.existsSync(svgFile)){
+        fs.unlinkSync(svgFile);
       }
+      fs.renameSync(svgFileInit, svgFile);
+    }
 
-      fs.renameSync('src/style-init.css', 'src/style.css');
+    // replace css back
+    if(fs.existsSync(cssFileInit)){
+      if(fs.existsSync(cssFile)){
+        fs.unlinkSync(cssFile);
+      }
+      fs.renameSync(cssFileInit, cssFile);
     }
   }
 }

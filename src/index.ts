@@ -1,5 +1,6 @@
 import {Lang, parseLang} from "./lang";
-import css from './style.css';
+import css from './assets/style.css';
+import svg from './assets/icon.svg';
 
 export interface SmartyPayButtonProps {
   target?: string,
@@ -33,11 +34,13 @@ export class SmartyPayButton {
     const lang = parseLang(langVal);
 
     const button = document.createElement('button');
-    button.innerText = label(lang);
     button.classList.add('smarty-pay-button');
+    button.insertAdjacentHTML('beforeend', `<span>${svg}</span>`);
+    button.insertAdjacentHTML('beforeend',`<span>${label(lang)}</span>`);
+    button.insertAdjacentHTML('beforeend',`<span>69.99 USD</span>`);
 
-    elem.replaceWith(button);
     addCssToDocument(css);
+    elem.replaceWith(button);
   }
 
 
@@ -45,7 +48,7 @@ export class SmartyPayButton {
 
 
 function label(lang: Lang): string {
-  if(lang === 'ru') return 'Оплатить';
+  if(lang === 'ru') return 'Оплата';
   if(lang === 'es') return 'Pagar';
   return 'Pay';
 }
