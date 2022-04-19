@@ -1,4 +1,5 @@
 import {Lang, parseLang} from "./lang";
+import css from './style.css';
 
 export interface SmartyPayButtonProps {
   target?: string,
@@ -33,8 +34,10 @@ export class SmartyPayButton {
 
     const button = document.createElement('button');
     button.innerText = label(lang);
+    button.classList.add('smarty-pay-button');
 
     elem.replaceWith(button);
+    addCssToDocument(css);
   }
 
 
@@ -45,6 +48,13 @@ function label(lang: Lang): string {
   if(lang === 'ru') return 'Оплатить';
   if(lang === 'es') return 'Pagar';
   return 'Pay';
+}
+
+
+function addCssToDocument(css: string){
+  const style = document.createElement('style')
+  style.innerText = css
+  document.head.appendChild(style)
 }
 
 
