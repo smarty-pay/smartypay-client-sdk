@@ -1,0 +1,47 @@
+
+.smarty-pay-button {
+  width: 280px;
+  min-height: 48px;
+  background: #F3F3F3;
+  box-shadow: 0 3px 2px -2px rgba(0, 0, 0, 0.2);
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+  transition: 0.5s;
+
+  font-family: 'Open Sans', sans-serif;
+  font-style: normal;
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 22px;
+  letter-spacing: 0.02em;
+  font-feature-settings: 'tnum' on, 'lnum' on;
+  color: #29303E;
+
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  align-items: center;
+  padding: 13px;
+}
+
+.smarty-pay-button:hover {
+  background: #efefef;
+}
+
+.smarty-pay-button:active {
+  background: #e0e0e0;
+}
+
+.smarty-pay-button > *:first-child {
+  display: flex;
+  text-align: left;
+}
+.smarty-pay-button > *:last-child {
+  text-align: right;
+}
+.smarty-pay-button > *:first-child,
+.smarty-pay-button > *:last-child {
+  flex: 2;
+}
+
