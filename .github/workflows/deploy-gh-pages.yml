@@ -10,7 +10,7 @@ on:
     #tags:
     #  - v*
     branches:
-      - main
+      - __main
 
 jobs:
   deploy_pages:
