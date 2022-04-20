@@ -1,4 +1,15 @@
 
+button, div, p, span {
+  font-family: "Open Sans", sans-serif;
+  font-feature-settings: 'tnum' on, 'lnum' on;
+  color: #29303E;
+  font-size: 16px;
+  line-height: 22px;
+  letter-spacing: 0.02em;
+  font-style: normal;
+}
+
+
 .hide {
   display: none !important;
 }
@@ -10,17 +21,8 @@
   box-shadow: 0 3px 2px -2px rgba(0, 0, 0, 0.2);
   border-radius: 8px;
   border: none;
-  cursor: pointer;
   transition: background-color 0.3s;
-
-  font-family: "Open Sans", sans-serif;
-  font-style: normal;
   font-weight: 700;
-  font-size: 16px;
-  line-height: 22px;
-  letter-spacing: 0.02em;
-  font-feature-settings: 'tnum' on, 'lnum' on;
-  color: #29303E;
 
   display: flex;
   justify-content: space-between;
@@ -29,11 +31,17 @@
   padding: 0 13px;
 }
 
-.pay-button:hover {
-  background: #eeeeee;
+.pay-button.disabled > span {
+  color: #c2c2c2;
 }
 
-.pay-button:active {
+.pay-button:not(.disabled){
+  cursor: pointer;
+}
+.pay-button:hover:not(.disabled) {
+  background: #eeeeee;
+}
+.pay-button:active:not(.disabled) {
   background: #e0e0e0;
 }
 
@@ -47,5 +55,10 @@
 .pay-button > *:first-child,
 .pay-button > *:last-child {
   flex: 2;
+}
+
+.error {
+  color: brown;
+  padding: 12px 0;
 }
 

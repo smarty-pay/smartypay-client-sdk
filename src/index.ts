@@ -5,10 +5,10 @@ import {initOpenSansFont, makeElem, makeStyleElement} from "./util";
 
 
 export interface SmartyPayButtonProps {
-  target?: string,
-  apiKey?: string,
-  token?: string,
-  amount?: string,
+  target: string | undefined,
+  apiKey: string | undefined,
+  token: string | undefined,
+  amount: string | undefined,
   lang?: string,
   skipCustomFont?: boolean,
 }
@@ -50,6 +50,9 @@ export class SmartyPayButton {
     {
       target,
       lang: langVal,
+      apiKey,
+      token,
+      amount,
     }: SmartyPayButtonProps
   ){
 
@@ -76,10 +79,27 @@ export class SmartyPayButton {
     button.appendChild(makeElem(`<span>${label(lang)} 69.99 USD</span>`));
     button.appendChild(makeElem(`<span></span>`));
 
+    let errorElem: HTMLElement|undefined;
+    if( ! apiKey){
+      errorElem = makeErrorParam('apiKey', lang);
+    }
+    else if( ! token){
+      errorElem = makeErrorParam('token', lang);
+    }
+    else if( ! amount){
+      errorElem = makeErrorParam('amount', lang);
+    }
+
 
     const root = elem.attachShadow({mode: 'closed'});
     root.appendChild(makeStyleElement(css));
     root.appendChild(button);
+
+    if( errorElem){
+      root.appendChild(errorElem);
+      button.classList.add('disabled');
+    }
+
   }
 
 }
@@ -92,6 +112,15 @@ function label(lang: Lang): string {
 }
 
 
+function makeErrorParam(key: string, lang: Lang){
+  return makeElem(`<div class="error">${errorParam(key, lang)}</div>`);
+}
+
+function errorParam(key: string, lang: Lang){
+  if(lang === 'ru') return `Неверный параметр "${key}"`;
+  if(lang === 'es') return `Parámetro no válido "${key}"`;
+  return `Invalid parameter "${key}"`;
+}
 
 
 
