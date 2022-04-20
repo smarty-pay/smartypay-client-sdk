@@ -22,19 +22,21 @@ export class SmartyPayButton {
 
   constructor(props: SmartyPayButtonProps) {
 
+    // need to wait our font to be loaded for prevent visual artefacts on button text
     try {
       (document as any).fonts.ready.then(()=>{
         this.init(props);
       });
-    } catch (e){
+    }
+    catch (e){
       console.warn('cannot get fonts ready status', e);
-    } finally {
+    }
+    finally {
       // backup init without font wait
       setTimeout(()=>{
         this.init(props);
       }, 500);
     }
-
   }
 
 

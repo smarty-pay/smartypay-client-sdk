@@ -14,10 +14,17 @@ export function makeStyleElement(css: string) {
 }
 
 
+const openSansTag = '<link href="https://fonts.googleapis.com/css?family=Open+Sans:400,700" rel="stylesheet" type="text/css">';
+let openSansReady = false;
+
 export function initOpenSansFont() {
-  const openSansTag = '<link href="https://fonts.googleapis.com/css?family=Open+Sans:400,700" rel="stylesheet" type="text/css">';
+
+  if(openSansReady)
+    return;
+
   try {
     document.head.appendChild(makeElem(openSansTag));
+    openSansReady = true;
   } catch (e){
     console.warn('cannot init font', e);
   }
