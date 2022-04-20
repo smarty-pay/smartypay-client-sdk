@@ -9,6 +9,10 @@
     * {
       color: gray !important;
     }
+
+    div {
+      margin-bottom: 40px;
+    }
   </style>
 
   <h3>Test SDK</h3>
@@ -18,7 +22,22 @@
   <noscript><a href="https://smartypay.io">Web3 Payments</a> are currently not supported without JavaScript enabled.</noscript>
   <script>
     new SmartyPayButton({
-      target: 'smartypay'
+      target: 'smartypay',
+      apiKey: 'YOUR_API_KEY',
+      amount: '1.99',
+      token: 'bUSDT',
+      lang: 'en',
+    })
+  </script>
+
+  <div id="smartypay2"></div>
+  <script>
+    new SmartyPayButton({
+      target: 'smartypay2',
+      apiKey: 'YOUR_API_KEY',
+      amount: '1.99',
+      token: 'bUSDT',
+      lang: 'en',
     })
   </script>
 

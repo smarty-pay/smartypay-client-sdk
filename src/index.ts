@@ -1,7 +1,7 @@
 import {Lang, parseLang} from "./lang";
 import css from './assets/style.css';
 import svg from './assets/icon.svg';
-import {initOpenSansFont, makeElem, makeStyleElement} from "./util";
+import {disableButton, initOpenSansFont, makeElem, makeStyleElement, postForm} from './util';
 
 
 export interface SmartyPayButtonProps {
@@ -13,10 +13,19 @@ export interface SmartyPayButtonProps {
   skipCustomFont?: boolean,
 }
 
+interface CallProps {
+  apiKey: string,
+  token: string,
+  amount: string,
+  lang: Lang,
+}
+
 
 export class SmartyPayButton {
 
   private inited = false;
+  private button: HTMLButtonElement|undefined;
+  private callProps: CallProps|undefined;
 
   constructor(props: SmartyPayButtonProps) {
     
@@ -76,7 +85,7 @@ export class SmartyPayButton {
     const button = document.createElement('button');
     button.classList.add('pay-button');
     button.appendChild(makeElem(`<span>${svg}</span>`));
-    button.appendChild(makeElem(`<span>${label(lang)} 69.99 USD</span>`));
+    button.appendChild(makeElem(`<span>${label(lang)} ${amount && token? `${amount} ${tokenLabel(token)}` : ''}</span>`));
     button.appendChild(makeElem(`<span></span>`));
 
     let errorElem: HTMLElement|undefined;
@@ -97,9 +106,38 @@ export class SmartyPayButton {
 
     if( errorElem){
       root.appendChild(errorElem);
-      button.classList.add('disabled');
+      disableButton(button);
+    }
+    else {
+
+      this.button = button;
+      this.callProps = {
+        apiKey: apiKey!,
+        amount: amount!,
+        token: token!,
+        lang
+      };
+
+      button.addEventListener('click', ()=>{
+        this.click();
+      });
+    }
+  }
+
+  click(){
+
+    if( ! this.button || ! this.callProps){
+      return;
     }
 
+    const {apiKey, token, amount, lang} = this.callProps;
+
+    postForm('https://api.smartypay.io/checkout', {
+      'api-key': apiKey,
+      token,
+      amount,
+      lang,
+    });
   }
 
 }
@@ -122,7 +160,23 @@ function errorParam(key: string, lang: Lang){
   return `Invalid parameter "${key}"`;
 }
 
+function tokenLabel(token: string|undefined){
+  if( ! token)
+    return '';
 
+  // test net
+  if(token.startsWith('bt') || token.startsWith('pm')){
+    return token.substring(2);
+  }
+
+  // main net
+  if(token.startsWith('b') || token.startsWith('p')){
+    return token.substring(1);
+  }
+
+  // unknown token format
+  return token;
+}
 
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
