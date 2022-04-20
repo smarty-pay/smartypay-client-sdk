@@ -36,8 +36,8 @@ export class SmartyPayButton {
     const button = document.createElement('button');
     button.classList.add('smarty-pay-button');
     button.insertAdjacentHTML('beforeend', `<span>${svg}</span>`);
-    button.insertAdjacentHTML('beforeend',`<span>${label(lang)}</span>`);
-    button.insertAdjacentHTML('beforeend',`<span>69.99 USD</span>`);
+    button.insertAdjacentHTML('beforeend',`<span>${label(lang)} 69.99 USD</span>`);
+    button.insertAdjacentHTML('beforeend',`<span></span>`);
 
     addCssToDocument(css);
     elem.replaceWith(button);

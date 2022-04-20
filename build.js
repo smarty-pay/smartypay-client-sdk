@@ -37,7 +37,7 @@ async function build(){
       bundle: true,
       minify: true,
       sourcemap: 'external',
-      outfile: 'dist/esbuild/payment-button.js',
+      outfile: 'dist/esbuild/smartypay-client-sdk.js',
       loader: {
         '.css': 'text',
         '.svg': 'text',

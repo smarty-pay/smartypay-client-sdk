@@ -7,7 +7,7 @@
   border-radius: 8px;
   border: none;
   cursor: pointer;
-  transition: 0.5s;
+  transition: 0.3s;
 
   font-family: 'Open Sans', sans-serif;
   font-style: normal;
@@ -22,11 +22,11 @@
   justify-content: space-between;
   flex-wrap: wrap;
   align-items: center;
-  padding: 13px;
+  padding: 0 13px;
 }
 
 .smarty-pay-button:hover {
-  background: #efefef;
+  background: #eeeeee;
 }
 
 .smarty-pay-button:active {
