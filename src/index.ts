@@ -4,15 +4,13 @@ import svg from './assets/icon.svg';
 import {initOpenSansFont, makeElem, makeStyleElement} from "./util";
 
 
-initOpenSansFont();
-
-
 export interface SmartyPayButtonProps {
   target?: string,
   apiKey?: string,
   token?: string,
   amount?: string,
   lang?: string,
+  skipCustomFont?: boolean,
 }
 
 
@@ -21,6 +19,14 @@ export class SmartyPayButton {
   private inited = false;
 
   constructor(props: SmartyPayButtonProps) {
+    
+    if( props.skipCustomFont){
+      this.init(props);
+      return;
+    }
+
+    // add our custom font into page's head tag
+    initOpenSansFont();
 
     // need to wait our font to be loaded for prevent visual artefacts on button text
     try {
@@ -35,7 +41,7 @@ export class SmartyPayButton {
       // backup init without font wait
       setTimeout(()=>{
         this.init(props);
-      }, 500);
+      }, 800);
     }
   }
 
