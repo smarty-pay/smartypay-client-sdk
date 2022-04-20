@@ -5,12 +5,20 @@
   </head>
   <body>
 
-  <div id="smarty-pay-button"></div>
+  <style>
+    * {
+      color: gray !important;
+    }
+  </style>
+
+  <h3>Test SDK</h3>
+
+  <div id="smartypay"></div>
   <script src="./dist/esbuild/smartypay-client-sdk.js"></script>
   <noscript><a href="https://smartypay.io">Web3 Payments</a> are currently not supported without JavaScript enabled.</noscript>
   <script>
     new SmartyPayButton({
-      target: 'smarty-pay-button'
+      target: 'smartypay'
     })
   </script>
 

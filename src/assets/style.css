@@ -1,5 +1,9 @@
 
-.smarty-pay-button {
+.hide {
+  display: none !important;
+}
+
+.pay-button {
   width: 280px;
   min-height: 48px;
   background: #F3F3F3;
@@ -7,9 +11,9 @@
   border-radius: 8px;
   border: none;
   cursor: pointer;
-  transition: 0.3s;
+  transition: background-color 0.3s;
 
-  font-family: 'Open Sans', sans-serif;
+  font-family: "Open Sans", sans-serif;
   font-style: normal;
   font-weight: 700;
   font-size: 16px;
@@ -25,23 +29,23 @@
   padding: 0 13px;
 }
 
-.smarty-pay-button:hover {
+.pay-button:hover {
   background: #eeeeee;
 }
 
-.smarty-pay-button:active {
+.pay-button:active {
   background: #e0e0e0;
 }
 
-.smarty-pay-button > *:first-child {
+.pay-button > *:first-child {
   display: flex;
   text-align: left;
 }
-.smarty-pay-button > *:last-child {
+.pay-button > *:last-child {
   text-align: right;
 }
-.smarty-pay-button > *:first-child,
-.smarty-pay-button > *:last-child {
+.pay-button > *:first-child,
+.pay-button > *:last-child {
   flex: 2;
 }
 

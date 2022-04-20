@@ -1,6 +1,11 @@
 import {Lang, parseLang} from "./lang";
 import css from './assets/style.css';
 import svg from './assets/icon.svg';
+import {initOpenSansFont, makeElem, makeStyleElement} from "./util";
+
+
+initOpenSansFont();
+
 
 export interface SmartyPayButtonProps {
   target?: string,
@@ -13,12 +18,36 @@ export interface SmartyPayButtonProps {
 
 export class SmartyPayButton {
 
-  constructor(
+  private inited = false;
+
+  constructor(props: SmartyPayButtonProps) {
+
+    try {
+      (document as any).fonts.ready.then(()=>{
+        this.init(props);
+      });
+    } catch (e){
+      console.warn('cannot get fonts ready status', e);
+    } finally {
+      // backup init without font wait
+      setTimeout(()=>{
+        this.init(props);
+      }, 500);
+    }
+
+  }
+
+
+  private init(
     {
       target,
       lang: langVal,
     }: SmartyPayButtonProps
-  ) {
+  ){
+
+    if(this.inited)
+      return;
+    this.inited = true;
 
     if( ! target){
       console.warn('cannot find target to render SmartyPayButton');
@@ -34,15 +63,16 @@ export class SmartyPayButton {
     const lang = parseLang(langVal);
 
     const button = document.createElement('button');
-    button.classList.add('smarty-pay-button');
-    button.insertAdjacentHTML('beforeend', `<span>${svg}</span>`);
-    button.insertAdjacentHTML('beforeend',`<span>${label(lang)} 69.99 USD</span>`);
-    button.insertAdjacentHTML('beforeend',`<span></span>`);
+    button.classList.add('pay-button');
+    button.appendChild(makeElem(`<span>${svg}</span>`));
+    button.appendChild(makeElem(`<span>${label(lang)} 69.99 USD</span>`));
+    button.appendChild(makeElem(`<span></span>`));
 
-    addCssToDocument(css);
-    elem.replaceWith(button);
+
+    const root = elem.attachShadow({mode: 'closed'});
+    root.appendChild(makeStyleElement(css));
+    root.appendChild(button);
   }
-
 
 }
 
@@ -54,11 +84,7 @@ function label(lang: Lang): string {
 }
 
 
-function addCssToDocument(css: string){
-  const style = document.createElement('style')
-  style.innerText = css
-  document.head.appendChild(style)
-}
+
 
 
 
