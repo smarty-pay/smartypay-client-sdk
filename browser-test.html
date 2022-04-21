@@ -8,14 +8,15 @@
   <style>
     * {
       color: gray !important;
+      font-family: "Open Sans", sans-serif;
     }
 
     div {
-      margin-bottom: 40px;
+      margin-top: 30px;
     }
   </style>
 
-  <h3>Test SDK</h3>
+  <h3>Payment buttons</h3>
 
   <div id="smartypay"></div>
   <script src="./dist/esbuild/smartypay-client-sdk.js"></script>
@@ -38,6 +39,7 @@
       amount: '1.99',
       token: 'bUSDT',
       lang: 'en',
+      theme: 'dark',
     })
   </script>
 

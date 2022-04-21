@@ -4,6 +4,8 @@ import svg from './assets/icon.svg';
 import {disableButton, initOpenSansFont, makeElem, makeStyleElement, postForm} from './util';
 
 
+export type Theme = 'light' | 'dark'
+
 export interface SmartyPayButtonProps {
   target: string | undefined,
   apiKey: string | undefined,
@@ -11,6 +13,7 @@ export interface SmartyPayButtonProps {
   amount: string | undefined,
   lang?: string,
   skipCustomFont?: boolean,
+  theme?: Theme,
 }
 
 interface CallProps {
@@ -62,6 +65,7 @@ export class SmartyPayButton {
       apiKey,
       token,
       amount,
+      theme,
     }: SmartyPayButtonProps
   ){
 
@@ -87,6 +91,10 @@ export class SmartyPayButton {
     button.appendChild(makeElem(`<span>${svg}</span>`));
     button.appendChild(makeElem(`<span>${label(lang)} ${amount && token? `${amount} ${tokenLabel(token)}` : ''}</span>`));
     button.appendChild(makeElem(`<span></span>`));
+
+    if(theme === 'dark'){
+      button.classList.add('dark');
+    }
 
     let errorElem: HTMLElement|undefined;
     if( ! apiKey){
@@ -118,8 +126,20 @@ export class SmartyPayButton {
         lang
       };
 
+      // prevent multi-click
+      let actionId = 0;
+
       button.addEventListener('click', ()=>{
-        this.click();
+
+        actionId = Math.random();
+        const curActionId = actionId;
+
+        // timeout for visual click
+        setTimeout(()=>{
+          if(curActionId === actionId){
+            this.click();
+          }
+        }, 600);
       });
     }
   }

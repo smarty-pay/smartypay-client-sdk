@@ -31,18 +31,32 @@ button, div, p, span {
   padding: 0 13px;
 }
 
-.pay-button.disabled > span {
+.pay-button.dark {
+  background-color: #29303E;
+}
+.pay-button.dark > * {
+  color: #FFFFFF;
+}
+
+.pay-button.disabled:not(.dark) > span {
   color: #c2c2c2;
 }
 
 .pay-button:not(.disabled){
   cursor: pointer;
 }
-.pay-button:hover:not(.disabled) {
-  background: #eeeeee;
+.pay-button:hover:not(.disabled):not(.dark) {
+  background: #e1e1e1;
 }
-.pay-button:active:not(.disabled) {
-  background: #e0e0e0;
+.pay-button:active:not(.disabled):not(.dark) {
+  background: #c7c7c7;
+}
+
+.pay-button.dark:hover:not(.disabled) {
+  background-color: #353c4f;
+}
+.pay-button.dark:active:not(.disabled) {
+  background-color: #50586e;
 }
 
 .pay-button > *:first-child {
