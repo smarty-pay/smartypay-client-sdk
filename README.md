@@ -1,6 +1,14 @@
 # SmartyPay Client SDK
 Simple library for show a custom payment button in any website
 
+## Last version link
+```html
+<script src="https://checkout.smartypay.io/sdk/smartypay-client-sdk.js"></script>
+```
+
+## Demo
+[Online demo](https://checkout.smartypay.io/sdk/smartypay-client-sdk-example.html)
+
 ## Build steps
 ### Clone repository into your dir
 ```shell
@@ -17,7 +25,7 @@ npm npm run build
 ### Usage on page
 ```html
 <div id="smartypay"></div>
-<script src="./dist/esbuild/smartypay-client-sdk.js"></script>
+<script src="https://checkout.smartypay.io/sdk/smartypay-client-sdk.js"></script>
 <script>
 new SmartyPayButton({
   target: 'smartypay',
