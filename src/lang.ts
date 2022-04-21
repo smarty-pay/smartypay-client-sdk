@@ -1,4 +1,7 @@
-
+/**
+ * SmartyPay Client SDK
+ * @author Evgeny Dolganov <evgenij.dolganov@gmail.com>
+ */
 
 export type Lang = 'en' | 'ru' | 'es';
 

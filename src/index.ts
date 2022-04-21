@@ -1,3 +1,7 @@
+/**
+ * SmartyPay Client SDK
+ * @author Evgeny Dolganov <evgenij.dolganov@gmail.com>
+ */
 import {Lang, parseLang} from "./lang";
 import css from './assets/style.css';
 import svg from './assets/icon.svg';
