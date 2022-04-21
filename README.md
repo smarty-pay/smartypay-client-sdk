@@ -35,3 +35,7 @@ new SmartyPayButton({
 - **amount** - amount for invoice (example 0.99)
 - **lang** - `en` by default (also has `es`, `ru`)
 - **theme** - `light` (default) or `dark`
+
+
+### Full docs
+Checkout our TypeDocs: https://smarty-pay.github.io/smartypay-client-sdk/modules.html
