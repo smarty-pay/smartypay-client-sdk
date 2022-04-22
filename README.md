@@ -25,7 +25,7 @@ npm npm run build
 ### Usage on page
 ```html
 <div id="smartypay"></div>
-<script src="https://checkout.smartypay.io/sdk/smartypay-client-sdk.js"></script>
+<script src="https://checkout.smartypay.io/sdk/smartypay-client-sdk-1.0.js"></script>
 <script>
 new SmartyPayButton({
   target: 'smartypay',
