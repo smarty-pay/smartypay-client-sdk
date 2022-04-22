@@ -9,6 +9,8 @@ const svgFile = 'src/assets/icon.svg';
 const svgFileMin = 'src/assets/icon.min.svg';
 const svgFileInit = 'src/assets/icon.init.svg';
 
+const VERSION = '1.0';
+
 async function build(){
 
   try {
@@ -37,7 +39,7 @@ async function build(){
       bundle: true,
       minify: true,
       sourcemap: 'external',
-      outfile: 'dist/esbuild/smartypay-client-sdk.js',
+      outfile: `dist/esbuild/smartypay-client-sdk-${VERSION}.js`,
       loader: {
         '.css': 'text',
         '.svg': 'text',
