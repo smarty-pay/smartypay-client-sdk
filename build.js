@@ -9,7 +9,7 @@ const svgFile = 'src/assets/icon.svg';
 const svgFileMin = 'src/assets/icon.min.svg';
 const svgFileInit = 'src/assets/icon.init.svg';
 
-const VERSION = '1.0';
+const VERSION = JSON.parse(fs.readFileSync('package.json')).version;
 
 async function build(){
 
