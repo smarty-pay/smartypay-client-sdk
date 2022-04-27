@@ -1,4 +1,4 @@
-# SmartyPay Client SDK
+# SMARTy Pay Client SDK
 Simple library for show a custom payment button in any website
 
 ## Stable version link
