@@ -1,5 +1,5 @@
 /**
- * SmartyPay Client SDK
+ * SMARTy Pay Client SDK
  * @author Evgeny Dolganov <evgenij.dolganov@gmail.com>
  */
 
