@@ -13,7 +13,7 @@ Simple library for show a custom payment button in any website
 ### Clone repository into your dir
 ```shell
 cd your_dir
-git clone https://github.com/smarty-pay/payment-button
+git clone https://github.com/smarty-pay/smartypay-client-sdk
 ```
 
 ### Build
