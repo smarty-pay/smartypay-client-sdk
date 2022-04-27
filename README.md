@@ -45,5 +45,5 @@ new SmartyPayButton({
 - **theme** - `light` (default) or `dark`
 
 
-### Full docs
-Checkout our TypeDocs: https://smarty-pay.github.io/smartypay-client-sdk/modules.html
+## Full docs
+Checkout our [TypeDocs](https://smarty-pay.github.io/smartypay-client-sdk/modules.html)
