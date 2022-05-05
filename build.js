@@ -1,4 +1,5 @@
 const esbuild = require('esbuild');
+const { dtsPlugin } = require("esbuild-plugin-d.ts");
 const fs = require('fs');
 
 const cssFile = 'src/assets/style.css';
@@ -9,7 +10,7 @@ const svgFile = 'src/assets/icon.svg';
 const svgFileMin = 'src/assets/icon.min.svg';
 const svgFileInit = 'src/assets/icon.init.svg';
 
-const VERSION = JSON.parse(fs.readFileSync('package.json')).version;
+const VERSION = 'v1'
 
 async function build(){
 
@@ -32,10 +33,10 @@ async function build(){
     fs.renameSync(cssFile, cssFileInit);
     fs.renameSync(cssFileMin, cssFile);
 
-    // make js
+    // make global js
     await esbuild.build({
       logLevel: 'info',
-      entryPoints: ['src/index.ts'],
+      entryPoints: ['src/global.ts'],
       bundle: true,
       minify: true,
       sourcemap: 'external',
@@ -44,6 +45,23 @@ async function build(){
         '.css': 'text',
         '.svg': 'text',
       },
+    });
+
+    // make lib js
+    await esbuild.build({
+      logLevel: 'info',
+      entryPoints: ['src/index.ts'],
+      bundle: true,
+      minify: true,
+      sourcemap: 'external',
+      outfile: `dist/esbuild/index.js`,
+      loader: {
+        '.css': 'text',
+        '.svg': 'text',
+      },
+      plugins: [
+        dtsPlugin()
+      ]
     });
 
   } finally {

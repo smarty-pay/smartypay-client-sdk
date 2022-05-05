@@ -7,7 +7,7 @@ import css from './assets/style.css';
 import svg from './assets/icon.svg';
 import {disableButton, initOpenSansFont, makeElem, makeStyleElement, postForm} from './util';
 
-
+export {Lang};
 export type Theme = 'light' | 'dark'
 
 export interface SmartyPayButtonProps {
@@ -201,9 +201,5 @@ function tokenLabel(token: string|undefined){
   // unknown token format
   return token;
 }
-
-
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-(window as any).SmartyPayButton = SmartyPayButton;
 
 
