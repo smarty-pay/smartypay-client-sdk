@@ -202,4 +202,14 @@ function tokenLabel(token: string|undefined){
   return token;
 }
 
-
+export const Util = {
+  disableButton,
+  initOpenSansFont,
+  makeElem,
+  makeStyleElement,
+  postForm,
+  label,
+  makeErrorParam,
+  errorParam,
+  tokenLabel,
+}

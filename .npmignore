@@ -6,8 +6,6 @@
 .idea/*
 /docs/
 
-/src/example/*
-
 coverage
 *.log
 .gitlab-ci.yml
