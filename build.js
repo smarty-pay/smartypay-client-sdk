@@ -53,6 +53,7 @@ async function build(){
       entryPoints: ['src/index.ts'],
       bundle: true,
       minify: true,
+      format: 'esm',
       sourcemap: 'external',
       outfile: `dist/esbuild/index.js`,
       loader: {
