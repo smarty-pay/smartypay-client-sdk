@@ -203,6 +203,7 @@ function tokenLabel(token: string|undefined){
 }
 
 export const Util = {
+  parseLang,
   disableButton,
   initOpenSansFont,
   makeElem,
