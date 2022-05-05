@@ -19,7 +19,7 @@ git clone https://github.com/smarty-pay/smartypay-client-sdk
 ### Build
 ```shell
 npm install
-npm npm run build
+npm run build
 ```
 
 ### Usage on page
