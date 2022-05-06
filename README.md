@@ -9,20 +9,7 @@ Simple library for show a custom payment button in any website
 ## Demo
 [Online demo](https://checkout.smartypay.io/sdk/smartypay-client-sdk-example.html)
 
-## Build steps
-### Clone repository into your dir
-```shell
-cd your_dir
-git clone https://github.com/smarty-pay/smartypay-client-sdk
-```
-
-### Build
-```shell
-npm install
-npm run build
-```
-
-### Usage on page
+## Usage on page
 ```html
 <div id="smartypay"></div>
 <script src="https://checkout.smartypay.io/sdk/smartypay-client-sdk-v1.js"></script>
@@ -44,6 +31,21 @@ new SmartyPayButton({
 - **lang** - `en` by default (also has `es`, `ru`)
 - **theme** - `light` (default) or `dark`
 
+## Usage in React App
+See [React Client](https://github.com/smarty-pay/smartypay-client-react)
+
+## Build steps
+### Clone repository into your dir
+```shell
+cd your_dir
+git clone https://github.com/smarty-pay/smartypay-client-sdk
+```
+
+### Build
+```shell
+npm install
+npm run build
+```
 
 ## Full docs
 Checkout our [TypeDocs](https://smarty-pay.github.io/smartypay-client-sdk/modules.html)
