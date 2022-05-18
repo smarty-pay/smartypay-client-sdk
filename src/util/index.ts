@@ -16,23 +16,6 @@ export function makeStyleElement(css: string) {
   return style;
 }
 
-
-const openSansTag = '<link href="https://fonts.googleapis.com/css?family=Open+Sans:400,700" rel="stylesheet" type="text/css">';
-let openSansReady = false;
-
-export function initOpenSansFont() {
-
-  if(openSansReady)
-    return;
-
-  try {
-    document.head.appendChild(makeElem(openSansTag));
-    openSansReady = true;
-  } catch (e){
-    console.warn('cannot init font', e);
-  }
-}
-
 export function disableButton(button: HTMLButtonElement){
   button.classList.add('disabled');
   button.setAttribute('disabled', 'disabled');

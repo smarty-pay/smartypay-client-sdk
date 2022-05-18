@@ -3,51 +3,42 @@
  * @author Evgeny Dolganov <evgenij.dolganov@gmail.com>
  */
 
-import {disableButton, makeElem, makeStyleElement, postForm} from './util';
-import {Lang, parseLang} from './model/lang';
-import svg from './assets/icon.svg';
-import css from './assets/style.css';
-import {Theme} from './model/theme';
-import {labelPay, makeErrorParam, tokenLabel} from './i18n';
 import {CustomFontSupport} from './model/font';
 import {initFontByClass} from './util/font';
+import {Theme} from './model/theme';
+import {parseLang} from './model/lang';
+import {disableButton, makeElem, makeStyleElement} from './util';
+import svg from './assets/icon.svg';
+import {labelDonation, makeErrorParam} from './i18n';
+import css from './assets/style.css';
 
-export interface SmartyPayButtonProps extends CustomFontSupport {
+
+export interface SmartyPayDonationProps extends CustomFontSupport {
   target: string | undefined,
-  apiKey: string | undefined,
-  token: string | undefined,
-  amount: string | undefined,
+  donationId: string,
   lang?: string,
   theme?: Theme,
 }
 
-interface CallProps {
-  apiKey: string,
-  token: string,
-  amount: string,
-  lang: Lang,
-}
 
-
-export class SmartyPayButton {
+export class SmartyPayDonation {
 
   private button: HTMLButtonElement|undefined;
-  private callProps: CallProps|undefined;
+  private props: SmartyPayDonationProps;
 
-  constructor(props: SmartyPayButtonProps) {
-    initFontByClass(props, () => this.init(props));
+  constructor(props: SmartyPayDonationProps) {
+    this.props = props;
+    initFontByClass(props, () => this.init());
   }
 
-  private init(
-    {
+  private init(){
+
+    const {
       target,
+      donationId,
       lang: langVal,
-      apiKey,
-      token,
-      amount,
       theme,
-    }: SmartyPayButtonProps
-  ){
+    } = this.props;
 
     if( ! target){
       console.warn('cannot find target to render SmartyPayButton');
@@ -65,7 +56,7 @@ export class SmartyPayButton {
     const button = document.createElement('button');
     button.classList.add('pay-button');
     button.appendChild(makeElem(`<span>${svg}</span>`));
-    button.appendChild(makeElem(`<span>${labelPay(lang)} ${amount && token? `${amount} ${tokenLabel(token)}` : ''}</span>`));
+    button.appendChild(makeElem(`<span>${labelDonation(lang)}</span>`));
     button.appendChild(makeElem(`<span></span>`));
 
     if(theme === 'dark'){
@@ -73,14 +64,8 @@ export class SmartyPayButton {
     }
 
     let errorElem: HTMLElement|undefined;
-    if( ! apiKey){
-      errorElem = makeErrorParam('apiKey', lang);
-    }
-    else if( ! token){
-      errorElem = makeErrorParam('token', lang);
-    }
-    else if( ! amount){
-      errorElem = makeErrorParam('amount', lang);
+    if( ! donationId){
+      errorElem = makeErrorParam('donationId', lang);
     }
 
 
@@ -95,12 +80,6 @@ export class SmartyPayButton {
     else {
 
       this.button = button;
-      this.callProps = {
-        apiKey: apiKey!,
-        amount: amount!,
-        token: token!,
-        lang
-      };
 
       // prevent multi-click
       let actionId = 0;
@@ -122,20 +101,10 @@ export class SmartyPayButton {
 
   click(){
 
-    if( ! this.button || ! this.callProps){
+    if( ! this.button){
       return;
     }
 
-    const {apiKey, token, amount, lang} = this.callProps;
-
-    postForm('https://api.smartypay.io/checkout', {
-      'api-key': apiKey,
-      token,
-      amount,
-      lang,
-    });
+    console.log('call props', this.props);
   }
-
 }
-
-

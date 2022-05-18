@@ -13,6 +13,10 @@
       font-family: "Open Sans", sans-serif;
     }
 
+    h3.next {
+      margin-top: 80px;
+    }
+
     div {
       margin-top: 30px;
     }
@@ -21,7 +25,7 @@
   <h3>Payment buttons</h3>
 
   <div id="smartypay"></div>
-  <script src="./dist/esbuild/smartypay-client-sdk.js"></script>
+  <script src="./dist/esbuild/smartypay-client-sdk-v1.js"></script>
   <noscript><a href="https://smartypay.io">Web3 Payments</a> are currently not supported without JavaScript enabled.</noscript>
   <script>
     new SmartyPayButton({
@@ -40,6 +44,27 @@
       apiKey: 'YOUR_API_KEY',
       amount: '1.99',
       token: 'bUSDT',
+      lang: 'en',
+      theme: 'dark',
+    })
+  </script>
+
+  <h3 class="next">Donation buttons</h3>
+
+  <div id="smartypay3"></div>
+  <script>
+    new SmartyPayDonation({
+      target: 'smartypay3',
+      donationId: 'some',
+      lang: 'en',
+    })
+  </script>
+
+  <div id="smartypay4"></div>
+  <script>
+    new SmartyPayDonation({
+      target: 'smartypay4',
+      donationId: 'some',
       lang: 'en',
       theme: 'dark',
     })

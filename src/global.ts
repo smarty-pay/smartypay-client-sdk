@@ -3,7 +3,8 @@
  * @author Evgeny Dolganov <evgenij.dolganov@gmail.com>
  */
 import {SmartyPayButton} from './SmartyPayButton';
+import {SmartyPayDonation} from './SmartyPayDonation';
 
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
 (window as any).SmartyPayButton = SmartyPayButton;
+(window as any).SmartyPayDonation = SmartyPayDonation;

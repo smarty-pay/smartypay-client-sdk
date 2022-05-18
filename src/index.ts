@@ -2,23 +2,25 @@
  * SMARTy Pay Client SDK
  * @author Evgeny Dolganov <evgenij.dolganov@gmail.com>
  */
-import {Lang, parseLang} from "./lang";
-import {disableButton, initOpenSansFont, makeElem, makeStyleElement, postForm} from './util';
-import {SmartyPayButton, SmartyPayButtonProps, label, makeErrorParam, errorParam, tokenLabel} from './SmartyPayButton';
+import {Lang, parseLang} from "./model/lang";
+import {disableButton, makeElem, makeStyleElement, postForm} from './util';
+import {initOpenSansFont} from './util/font';
+import {SmartyPayButton, SmartyPayButtonProps} from './SmartyPayButton';
+import {labelPay, makeErrorParam, errorParam, tokenLabel} from './i18n';
 
-export {Lang};
 export {SmartyPayButton, SmartyPayButtonProps};
+export {Lang, parseLang, initOpenSansFont};
 
-
-export const Util = {
-  parseLang,
-  disableButton,
-  initOpenSansFont,
-  makeElem,
-  makeStyleElement,
-  postForm,
-  label,
+export const I18n = {
+  labelPay,
   makeErrorParam,
   errorParam,
   tokenLabel,
+}
+
+export const Util = {
+  disableButton,
+  makeElem,
+  makeStyleElement,
+  postForm,
 }
