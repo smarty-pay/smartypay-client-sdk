@@ -17,6 +17,11 @@ export interface MakeButtonReq {
   onClick?: ()=>void,
 }
 
+export interface MakeButtonResp {
+  root: ShadowRoot,
+  button: HTMLButtonElement,
+}
+
 export function initButton(
   {
     owner,
@@ -26,7 +31,7 @@ export function initButton(
     buttonText,
     onClick,
   }: MakeButtonReq
-): HTMLButtonElement|undefined {
+): MakeButtonResp | undefined {
 
   if( ! target){
     console.warn(`cannot find target to render ${owner}`);
@@ -77,7 +82,7 @@ export function initButton(
     });
   }
 
-  return button;
+  return { root, button };
 }
 
 

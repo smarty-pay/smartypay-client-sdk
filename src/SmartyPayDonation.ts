@@ -9,7 +9,7 @@ import {Theme} from './model/theme';
 import {parseLang} from './model/lang';
 import {labelDonation, makeErrorParam} from './i18n';
 import {initButton} from './button';
-
+import {makeElem} from './util';
 
 export interface SmartyPayDonationProps extends CustomFontSupport {
   target: string | undefined,
@@ -22,6 +22,7 @@ export interface SmartyPayDonationProps extends CustomFontSupport {
 export class SmartyPayDonation {
 
   private button: HTMLButtonElement|undefined;
+  private root: ShadowRoot|undefined;
   private props: SmartyPayDonationProps;
 
   constructor(props: SmartyPayDonationProps) {
@@ -42,21 +43,54 @@ export class SmartyPayDonation {
       errorElem = makeErrorParam('donationId', lang);
     }
 
-    this.button = initButton({
+    const initResp = initButton({
       ...this.props,
       owner: 'SmartyPayDonation',
       buttonText: labelDonation(lang),
       errorElem,
       onClick: ()=> this.click()
     });
+
+    this.button = initResp?.button;
+    this.root = initResp?.root;
   }
 
   click(){
 
-    if( ! this.button){
+    if( ! this.button || ! this.root){
       return;
     }
 
-    console.log('call props', this.props);
+    const {
+      donationId,
+      lang,
+    } = this.props;
+
+    const frameUrl = `${appUrl()}/${donationId}?lang=${lang}&frame-mode=true`;
+
+    const iframeParent = makeElem('<div class="iframe-container"></div>');
+    const iframe = makeElem(`<iframe class="frame" src="${frameUrl}" scrolling="0" frameborder="0"></iframe>`);
+
+    iframeParent.appendChild(iframe);
+    this.root.appendChild(iframeParent);
   }
+}
+
+function appUrl(): string {
+
+  const parentHost = window.location.hostname;
+
+  if(parentHost === 'localhost'){
+    return 'http://localhost:3000';
+  }
+
+  if(parentHost.includes('ncps-ui.dev.')){
+    return 'https://ncps-donations.dev.mnxsc.tech';
+  }
+
+  if(parentHost.includes('ncps-ui.staging.')){
+    return 'https://ncps-donations.staging.mnxsc.tech';
+  }
+
+  return 'https://donate.smartypay.io';
 }

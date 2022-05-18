@@ -57,13 +57,18 @@ export class SmartyPayButton {
       errorElem = makeErrorParam('amount', lang);
     }
 
-    this.button = initButton({
+    const initResp = initButton({
       ...props,
       owner: 'SmartyPayButton',
       buttonText: `${labelPay(lang)} ${amount && token? `${amount} ${tokenLabel(token)}` : ''}`,
       errorElem,
       onClick: ()=> this.click()
     });
+
+    if( ! initResp)
+      return;
+
+    this.button = initResp.button;
 
     this.callProps = {
       apiKey: apiKey!,
