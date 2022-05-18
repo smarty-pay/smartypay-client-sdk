@@ -3,8 +3,9 @@
  * @author Evgeny Dolganov <evgenij.dolganov@gmail.com>
  */
 import {Lang, parseLang} from "./model/lang";
-import {disableButton, makeElem, makeStyleElement, postForm} from './util';
+import {makeElem, makeStyleElement, postForm} from './util';
 import {initOpenSansFont} from './util/font';
+import {disableButton} from './button';
 import {SmartyPayButton, SmartyPayButtonProps} from './SmartyPayButton';
 import {labelPay, makeErrorParam, errorParam, tokenLabel} from './i18n';
 

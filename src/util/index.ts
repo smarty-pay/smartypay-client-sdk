@@ -16,11 +16,6 @@ export function makeStyleElement(css: string) {
   return style;
 }
 
-export function disableButton(button: HTMLButtonElement){
-  button.classList.add('disabled');
-  button.setAttribute('disabled', 'disabled');
-}
-
 
 /**
  * sends a request to the specified url from a form. this will change the window location.

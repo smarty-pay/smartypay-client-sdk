@@ -3,14 +3,13 @@
  * @author Evgeny Dolganov <evgenij.dolganov@gmail.com>
  */
 
-import {disableButton, makeElem, makeStyleElement, postForm} from './util';
+import {postForm} from './util';
 import {Lang, parseLang} from './model/lang';
-import svg from './assets/icon.svg';
-import css from './assets/style.css';
 import {Theme} from './model/theme';
 import {labelPay, makeErrorParam, tokenLabel} from './i18n';
 import {CustomFontSupport} from './model/font';
 import {initFontByClass} from './util/font';
+import {initButton} from './button';
 
 export interface SmartyPayButtonProps extends CustomFontSupport {
   target: string | undefined,
@@ -38,39 +37,14 @@ export class SmartyPayButton {
     initFontByClass(props, () => this.init(props));
   }
 
-  private init(
-    {
-      target,
-      lang: langVal,
+  private init(props: SmartyPayButtonProps){
+
+    const lang = parseLang(props.lang);
+    const {
       apiKey,
       token,
       amount,
-      theme,
-    }: SmartyPayButtonProps
-  ){
-
-    if( ! target){
-      console.warn('cannot find target to render SmartyPayButton');
-      return;
-    }
-
-    const elem = document.getElementById(target);
-    if( ! elem){
-      console.warn('cannot find element to render SmartyPayButton:', target);
-      return;
-    }
-
-    const lang = parseLang(langVal);
-
-    const button = document.createElement('button');
-    button.classList.add('pay-button');
-    button.appendChild(makeElem(`<span>${svg}</span>`));
-    button.appendChild(makeElem(`<span>${labelPay(lang)} ${amount && token? `${amount} ${tokenLabel(token)}` : ''}</span>`));
-    button.appendChild(makeElem(`<span></span>`));
-
-    if(theme === 'dark'){
-      button.classList.add('dark');
-    }
+    } = props;
 
     let errorElem: HTMLElement|undefined;
     if( ! apiKey){
@@ -83,41 +57,20 @@ export class SmartyPayButton {
       errorElem = makeErrorParam('amount', lang);
     }
 
+    this.button = initButton({
+      ...props,
+      owner: 'SmartyPayButton',
+      buttonText: `${labelPay(lang)} ${amount && token? `${amount} ${tokenLabel(token)}` : ''}`,
+      errorElem,
+      onClick: ()=> this.click()
+    });
 
-    const root = elem.attachShadow({mode: 'closed'});
-    root.appendChild(makeStyleElement(css));
-    root.appendChild(button);
-
-    if( errorElem){
-      root.appendChild(errorElem);
-      disableButton(button);
-    }
-    else {
-
-      this.button = button;
-      this.callProps = {
-        apiKey: apiKey!,
-        amount: amount!,
-        token: token!,
-        lang
-      };
-
-      // prevent multi-click
-      let actionId = 0;
-
-      button.addEventListener('click', ()=>{
-
-        actionId = Math.random();
-        const curActionId = actionId;
-
-        // timeout for visual click
-        setTimeout(()=>{
-          if(curActionId === actionId){
-            this.click();
-          }
-        }, 600);
-      });
-    }
+    this.callProps = {
+      apiKey: apiKey!,
+      amount: amount!,
+      token: token!,
+      lang,
+    };
   }
 
   click(){
