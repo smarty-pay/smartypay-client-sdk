@@ -24,6 +24,7 @@ export class SmartyPayDonation {
   private button: HTMLButtonElement|undefined;
   private root: ShadowRoot|undefined;
   private props: SmartyPayDonationProps;
+  private inDialog = false;
 
   constructor(props: SmartyPayDonationProps) {
     this.props = props;
@@ -61,18 +62,60 @@ export class SmartyPayDonation {
       return;
     }
 
+    if( this.inDialog){
+      return;
+    }
+    this.inDialog = true;
+
     const {
       donationId,
       lang,
     } = this.props;
 
-    const frameUrl = `${appUrl()}/${donationId}?lang=${lang}&frame-mode=true`;
+    const frameOrigin = appUrl();
+    const frameUrl = `${frameOrigin}/${donationId}?lang=${lang}&frame-mode=true`;
 
     const iframeParent = makeElem('<div class="iframe-container"></div>');
     const iframe = makeElem(`<iframe class="frame" src="${frameUrl}" scrolling="0" frameborder="0"></iframe>`);
 
     iframeParent.appendChild(iframe);
     this.root.appendChild(iframeParent);
+
+
+    // close events
+    const onEsc = (event: KeyboardEvent) => {
+      if (event.key === 'Escape') {
+        closeDialog();
+      }
+    };
+    document.addEventListener('keydown', onEsc);
+
+
+    // iframe events
+    const onFrameEvent = (event: MessageEvent) => {
+
+      if( event.origin !== frameOrigin){
+        return;
+      }
+
+      const {type, value} = event.data || {};
+
+      if(type === 'smartypay-event' && value === 'close'){
+        closeDialog();
+      }
+    }
+    window.addEventListener("message", onFrameEvent);
+
+
+    // close logic
+    const closeDialog = () => {
+
+      document.removeEventListener('keydown', onEsc);
+      window.removeEventListener("message", onFrameEvent);
+
+      this.root?.removeChild(iframeParent);
+      this.inDialog = false;
+    }
   }
 }
 
