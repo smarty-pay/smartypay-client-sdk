@@ -15,9 +15,23 @@
 </a>
 <p><a href="https://checkout.smartypay.io/sdk/smartypay-client-sdk-example.html">Online demo</a></p>
 
-<a href="#usage-on-page" id="usage-on-page" style="color: inherit; text-decoration: none;">
-  <h2>Usage on page</h2>
+<a href="#donation-button" id="donation-button" style="color: inherit; text-decoration: none;">
+  <h3>Donation button</h3>
 </a>
+<p><img src="content/donation-button.png?raw=true" alt="Button img" title="Title"></p>
+<pre><code class="language-html"><span class="hl-0">&lt;</span><span class="hl-1">div</span><span class="hl-5"> </span><span class="hl-3">id</span><span class="hl-5">=</span><span class="hl-4">&quot;smartypay&quot;</span><span class="hl-0">&gt;&lt;/</span><span class="hl-1">div</span><span class="hl-0">&gt;</span><br/><span class="hl-0">&lt;</span><span class="hl-1">script</span><span class="hl-2"> </span><span class="hl-3">src</span><span class="hl-2">=</span><span class="hl-4">&quot;https://checkout.smartypay.io/sdk/smartypay-client-sdk-v1.js&quot;</span><span class="hl-0">&gt;&lt;/</span><span class="hl-1">script</span><span class="hl-0">&gt;</span><br/><span class="hl-0">&lt;</span><span class="hl-1">script</span><span class="hl-0">&gt;</span><br/><span class="hl-6">new</span><span class="hl-2"> </span><span class="hl-7">SmartyPayDonation</span><span class="hl-2">({</span><br/><span class="hl-2">  </span><span class="hl-8">target:</span><span class="hl-2"> </span><span class="hl-9">&#39;smartypay&#39;</span><span class="hl-2">,</span><br/><span class="hl-2">  </span><span class="hl-8">donationId:</span><span class="hl-2"> </span><span class="hl-9">&#39;YOUR_DONATION_ID&#39;</span><span class="hl-2">,</span><br/><span class="hl-2">  </span><span class="hl-8">lang:</span><span class="hl-2"> </span><span class="hl-9">&#39;en&#39;</span><span class="hl-2">,</span><br/><span class="hl-2">  </span><span class="hl-8">theme:</span><span class="hl-2"> </span><span class="hl-9">&#39;dark&#39;</span><span class="hl-2">,</span><br/><span class="hl-2">})</span><br/><span class="hl-0">&lt;/</span><span class="hl-1">script</span><span class="hl-0">&gt;</span>
+</code></pre>
+<ul>
+<li><strong>target</strong> - element id</li>
+<li><strong>donationId</strong> - you can get it here: <a href="https://dashboard.smartypay.io/">https://dashboard.smartypay.io/</a></li>
+<li><strong>lang</strong> - <code>en</code> by default (also has <code>es</code>, <code>ru</code>)</li>
+<li><strong>theme</strong> - <code>light</code> (default) or <code>dark</code></li>
+</ul>
+
+<a href="#payment-button" id="payment-button" style="color: inherit; text-decoration: none;">
+  <h3>Payment Button</h3>
+</a>
+<p><img src="content/pay-button.png?raw=true" alt="Button img" title="Title"></p>
 <pre><code class="language-html"><span class="hl-0">&lt;</span><span class="hl-1">div</span><span class="hl-5"> </span><span class="hl-3">id</span><span class="hl-5">=</span><span class="hl-4">&quot;smartypay&quot;</span><span class="hl-0">&gt;&lt;/</span><span class="hl-1">div</span><span class="hl-0">&gt;</span><br/><span class="hl-0">&lt;</span><span class="hl-1">script</span><span class="hl-2"> </span><span class="hl-3">src</span><span class="hl-2">=</span><span class="hl-4">&quot;https://checkout.smartypay.io/sdk/smartypay-client-sdk-v1.js&quot;</span><span class="hl-0">&gt;&lt;/</span><span class="hl-1">script</span><span class="hl-0">&gt;</span><br/><span class="hl-0">&lt;</span><span class="hl-1">script</span><span class="hl-0">&gt;</span><br/><span class="hl-6">new</span><span class="hl-2"> </span><span class="hl-7">SmartyPayButton</span><span class="hl-2">({</span><br/><span class="hl-2">  </span><span class="hl-8">target:</span><span class="hl-2"> </span><span class="hl-9">&#39;smartypay&#39;</span><span class="hl-2">,</span><br/><span class="hl-2">  </span><span class="hl-8">apiKey:</span><span class="hl-2"> </span><span class="hl-9">&#39;YOUR_API_KEY&#39;</span><span class="hl-2">,</span><br/><span class="hl-2">  </span><span class="hl-8">amount:</span><span class="hl-2"> </span><span class="hl-9">&#39;1.99&#39;</span><span class="hl-2">,</span><br/><span class="hl-2">  </span><span class="hl-8">token:</span><span class="hl-2"> </span><span class="hl-9">&#39;bUSDT&#39;</span><span class="hl-2">,</span><br/><span class="hl-2">  </span><span class="hl-8">lang:</span><span class="hl-2"> </span><span class="hl-9">&#39;en&#39;</span><span class="hl-2">,</span><br/><span class="hl-2">  </span><span class="hl-8">theme:</span><span class="hl-2"> </span><span class="hl-9">&#39;dark&#39;</span><span class="hl-2">,</span><br/><span class="hl-2">})</span><br/><span class="hl-0">&lt;/</span><span class="hl-1">script</span><span class="hl-0">&gt;</span>
 </code></pre>
 <ul>
