@@ -9,7 +9,28 @@ Simple library for show a custom payment button in any website
 ## Demo
 [Online demo](https://checkout.smartypay.io/sdk/smartypay-client-sdk-example.html)
 
-## Usage on page
+### Donation button
+![Button img](content/donation-button.png?raw=true "Title")
+```html
+<div id="smartypay"></div>
+<script src="https://checkout.smartypay.io/sdk/smartypay-client-sdk-v1.js"></script>
+<script>
+new SmartyPayDonation({
+  target: 'smartypay',
+  donationId: 'YOUR_DONATION_ID',
+  lang: 'en',
+  theme: 'dark',
+})
+</script>
+```
+- **target** - element id
+- **donationId** - you can get it here: https://dashboard.smartypay.io/
+- **lang** - `en` by default (also has `es`, `ru`)
+- **theme** - `light` (default) or `dark`
+
+
+### Payment Button
+![Button img](content/pay-button.png?raw=true "Title")
 ```html
 <div id="smartypay"></div>
 <script src="https://checkout.smartypay.io/sdk/smartypay-client-sdk-v1.js"></script>
