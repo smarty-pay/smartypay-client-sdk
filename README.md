@@ -10,7 +10,7 @@ Simple library for show a custom payment button in any website
 [Online demo](https://checkout.smartypay.io/sdk/smartypay-client-sdk-example.html)
 
 ### Donation button
-![Button img](content/donation-button.png?raw=true "Title")
+![Button img](content/donation-button-dark.png?raw=true "Title")
 ```html
 <div id="smartypay"></div>
 <script src="https://checkout.smartypay.io/sdk/smartypay-client-sdk-v1.js"></script>
@@ -30,7 +30,7 @@ new SmartyPayDonation({
 
 
 ### Payment Button
-![Button img](content/pay-button.png?raw=true "Title")
+![Button img](content/pay-button-dark.png?raw=true "Title")
 ```html
 <div id="smartypay"></div>
 <script src="https://checkout.smartypay.io/sdk/smartypay-client-sdk-v1.js"></script>
