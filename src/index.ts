@@ -9,7 +9,7 @@ import {initOpenSansFont} from './util/font';
 import {disableButton} from './button';
 import {SmartyPayButton, SmartyPayButtonProps} from './SmartyPayButton';
 import {SmartyPayDonation, SmartyPayDonationProps} from './SmartyPayDonation';
-import {labelPay, makeErrorParam, errorParam, tokenLabel} from './i18n';
+import {labelPay, labelDonation, makeErrorParam, errorParam, tokenLabel} from './i18n';
 
 export {SmartyPayButton, SmartyPayButtonProps};
 export {SmartyPayDonation, SmartyPayDonationProps};
@@ -18,6 +18,7 @@ export {Theme, Lang, parseLang, initOpenSansFont};
 
 export const I18n = {
   labelPay,
+  labelDonation,
   makeErrorParam,
   errorParam,
   tokenLabel,
