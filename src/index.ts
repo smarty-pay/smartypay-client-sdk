@@ -8,11 +8,11 @@ import {makeElem, makeStyleElement, postForm} from './util';
 import {initOpenSansFont} from './util/font';
 import {disableButton} from './button';
 import {SmartyPayButton, SmartyPayButtonProps} from './SmartyPayButton';
-import {SmartyPayDonation, SmartyPayDonationProps} from './SmartyPayDonation';
+import {SmartyPayDonation, SmartyPayDonationProps, donationAppUrl} from './SmartyPayDonation';
 import {labelPay, labelDonation, makeErrorParam, errorParam, tokenLabel} from './i18n';
 
 export {SmartyPayButton, SmartyPayButtonProps};
-export {SmartyPayDonation, SmartyPayDonationProps};
+export {SmartyPayDonation, SmartyPayDonationProps, donationAppUrl};
 
 export {Theme, Lang, parseLang, initOpenSansFont};
 

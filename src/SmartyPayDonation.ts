@@ -72,7 +72,7 @@ export class SmartyPayDonation {
       lang,
     } = this.props;
 
-    const frameOrigin = appUrl();
+    const frameOrigin = donationAppUrl();
     const frameUrl = `${frameOrigin}/${donationId}?lang=${lang}&frame-mode=true`;
 
     const iframeParent = makeElem('<div class="iframe-container"></div>');
@@ -119,7 +119,7 @@ export class SmartyPayDonation {
   }
 }
 
-function appUrl(): string {
+export function donationAppUrl(): string {
 
   const parentHost = window.location.hostname;
 
