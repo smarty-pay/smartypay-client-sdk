@@ -14,7 +14,9 @@ import {labelPay, labelDonation, makeErrorParam, errorParam, tokenLabel} from '.
 export {SmartyPayButton, SmartyPayButtonProps};
 export {SmartyPayDonation, SmartyPayDonationProps, donationAppUrl};
 
-export {Theme, Lang, parseLang, initOpenSansFont};
+export {parseLang, initOpenSansFont};
+export type {Theme};
+export type {Lang};
 
 export const I18n = {
   labelPay,
