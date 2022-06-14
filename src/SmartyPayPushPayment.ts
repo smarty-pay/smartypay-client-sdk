@@ -7,26 +7,26 @@ import {CustomFontSupport} from './model/font';
 import {initFontByClass} from './util/font';
 import {Theme} from './model/theme';
 import {parseLang} from './model/lang';
-import {labelDonation, makeErrorParam} from './i18n';
+import {labelPushAddress, makeErrorParam} from './i18n';
 import {initButton} from './button';
 import {initIFrameDialog} from './iframe-dialog';
 
-export interface SmartyPayDonationProps extends CustomFontSupport {
+export interface SmartyPayPushPaymentProps extends CustomFontSupport {
   target: string | undefined,
-  donationId: string,
+  address: string,
   lang?: string,
   theme?: Theme,
 }
 
 
-export class SmartyPayDonation {
+export class SmartyPayPushPayment {
 
   private button: HTMLButtonElement|undefined;
   private root: ShadowRoot|undefined;
-  private props: SmartyPayDonationProps;
+  private props: SmartyPayPushPaymentProps;
   private inDialog = false;
 
-  constructor(props: SmartyPayDonationProps) {
+  constructor(props: SmartyPayPushPaymentProps) {
     this.props = props;
     initFontByClass(props, () => this.init());
   }
@@ -36,18 +36,18 @@ export class SmartyPayDonation {
     const lang = parseLang(this.props.lang);
 
     const {
-      donationId,
+      address,
     } = this.props;
 
     let errorElem: HTMLElement|undefined;
-    if( ! donationId){
-      errorElem = makeErrorParam('donationId', lang);
+    if( ! address){
+      errorElem = makeErrorParam('address', lang);
     }
 
     const initResp = initButton({
       ...this.props,
-      owner: 'SmartyPayDonation',
-      buttonText: labelDonation(lang),
+      owner: 'SmartyPayPushAddress',
+      buttonText: labelPushAddress(lang),
       errorElem,
       onClick: ()=> this.click()
     });
@@ -68,12 +68,12 @@ export class SmartyPayDonation {
     this.inDialog = true;
 
     const {
-      donationId,
+      address,
       lang,
     } = this.props;
 
-    const frameOrigin = donationAppUrl();
-    const frameUrl = `${frameOrigin}/${donationId}?lang=${lang}&frame-mode=true`;
+    const frameOrigin = pushAddressAppUrl();
+    const frameUrl = `${frameOrigin}/${address}?lang=${lang}&frame-mode=true`;
 
     initIFrameDialog({
       frameOrigin,
@@ -86,7 +86,7 @@ export class SmartyPayDonation {
   }
 }
 
-export function donationAppUrl(): string {
+export function pushAddressAppUrl(): string {
 
   const parentHost = window.location.hostname;
 
@@ -95,12 +95,12 @@ export function donationAppUrl(): string {
   }
 
   if(parentHost.includes('ncps-ui.dev.')){
-    return 'https://ncps-donations.dev.mnxsc.tech';
+    return 'https://ncps-push-ui.dev.mnxsc.tech';
   }
 
   if(parentHost.includes('ncps-ui.staging.')){
-    return 'https://ncps-donations.staging.mnxsc.tech';
+    return 'https://ncps-push-ui.staging.mnxsc.tech';
   }
 
-  return 'https://donate.smartypay.io';
+  return 'https://push.smartypay.io';
 }

@@ -19,6 +19,12 @@ export function labelDonation(lang: Lang): string {
   return 'Donation';
 }
 
+export function labelPushAddress(lang: Lang): string {
+  if(lang === 'ru') return 'Push Payment';
+  if(lang === 'es') return 'Push Payment';
+  return 'Push Payment';
+}
+
 
 export function makeErrorParam(key: string, lang: Lang){
   return makeElem(`<div class="error">${errorParam(key, lang)}</div>`);

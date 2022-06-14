@@ -52,6 +52,26 @@ new SmartyPayButton({
 - **lang** - `en` by default (also has `es`, `ru`)
 - **theme** - `light` (default) or `dark`
 
+
+### Push Payment button
+![Button img](content/push-payment-dark.png?raw=true "Title")
+```html
+<div id="smartypay"></div>
+<script src="https://checkout.smartypay.io/sdk/smartypay-client-sdk-v1.js"></script>
+<script>
+new SmartyPayPushPayment({
+  target: 'smartypay',
+  address: 'CLIENT_PUSH_PAYMENT_ADDRESS',
+  lang: 'en',
+  theme: 'dark',
+})
+</script>
+```
+- **target** - element id
+- **address** - push-payment address for client
+- **lang** - `en` by default (also has `es`, `ru`)
+- **theme** - `light` (default) or `dark`
+
 ## Usage in React App
 See [React Client](https://github.com/smarty-pay/smartypay-client-react)
 
