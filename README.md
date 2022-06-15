@@ -68,7 +68,7 @@ new SmartyPayPushPayment({
 </script>
 ```
 - **target** - element id
-- **address** - push-payment address for client
+- **address** - push-payment address for client (see [docs](https://docs.smartypay.io/api/push-payments))
 - **lang** - `en` by default (also has `es`, `ru`)
 - **theme** - `light` (default) or `dark`
 
