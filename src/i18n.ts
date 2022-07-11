@@ -14,9 +14,9 @@ export function labelPay(lang: Lang): string {
 }
 
 export function labelDonation(lang: Lang): string {
-  if(lang === 'ru') return 'Пожертвование';
-  if(lang === 'es') return 'Donación';
-  return 'Donation';
+  if(lang === 'ru') return 'Пожертвовать';
+  if(lang === 'es') return 'Donar';
+  return 'Donate';
 }
 
 export function labelPushAddress(lang: Lang): string {
