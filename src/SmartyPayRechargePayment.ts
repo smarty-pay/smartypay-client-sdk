@@ -7,11 +7,11 @@ import {CustomFontSupport} from './model/font';
 import {initFontByClass} from './util/font';
 import {Theme} from './model/theme';
 import {parseLang} from './model/lang';
-import {labelPushAddress, makeErrorParam} from './i18n';
+import {labelRechargeAddress, makeErrorParam} from './i18n';
 import {initButton} from './button';
 import {initIFrameDialog} from './iframe-dialog';
 
-export interface SmartyPayPushPaymentProps extends CustomFontSupport {
+export interface SmartyPayRechargePaymentProps extends CustomFontSupport {
   target: string | undefined,
   address: string,
   lang?: string,
@@ -19,14 +19,14 @@ export interface SmartyPayPushPaymentProps extends CustomFontSupport {
 }
 
 
-export class SmartyPayPushPayment {
+export class SmartyPayRechargePayment {
 
   private button: HTMLButtonElement|undefined;
   private root: ShadowRoot|undefined;
-  private props: SmartyPayPushPaymentProps;
+  private props: SmartyPayRechargePaymentProps;
   private inDialog = false;
 
-  constructor(props: SmartyPayPushPaymentProps) {
+  constructor(props: SmartyPayRechargePaymentProps) {
     this.props = props;
     initFontByClass(props, () => this.init());
   }
@@ -46,8 +46,8 @@ export class SmartyPayPushPayment {
 
     const initResp = initButton({
       ...this.props,
-      owner: 'SmartyPayPushAddress',
-      buttonText: labelPushAddress(lang),
+      owner: 'SmartyPayRechargePayment',
+      buttonText: labelRechargeAddress(lang),
       errorElem,
       onClick: ()=> this.click()
     });
@@ -72,7 +72,7 @@ export class SmartyPayPushPayment {
       lang,
     } = this.props;
 
-    const frameOrigin = pushAddressAppUrl();
+    const frameOrigin = rechargeAddressAppUrl();
     const frameUrl = `${frameOrigin}/${address}?lang=${lang}&frame-mode=true`;
 
     initIFrameDialog({
@@ -86,7 +86,7 @@ export class SmartyPayPushPayment {
   }
 }
 
-export function pushAddressAppUrl(): string {
+export function rechargeAddressAppUrl(): string {
 
   const parentHost = window.location.hostname;
 

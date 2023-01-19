@@ -4,9 +4,9 @@
  */
 import {SmartyPayButton} from './SmartyPayButton';
 import {SmartyPayDonation} from './SmartyPayDonation';
-import {SmartyPayPushPayment} from './SmartyPayPushPayment';
+import {SmartyPayRechargePayment} from './SmartyPayRechargePayment';
 
 
 (window as any).SmartyPayButton = SmartyPayButton;
 (window as any).SmartyPayDonation = SmartyPayDonation;
-(window as any).SmartyPayPushPayment = SmartyPayPushPayment;
+(window as any).SmartyPayRechargePayment = SmartyPayRechargePayment;

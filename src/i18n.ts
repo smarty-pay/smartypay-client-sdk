@@ -19,10 +19,10 @@ export function labelDonation(lang: Lang): string {
   return 'Donate';
 }
 
-export function labelPushAddress(lang: Lang): string {
-  if(lang === 'ru') return 'Push Payment';
-  if(lang === 'es') return 'Push Payment';
-  return 'Push Payment';
+export function labelRechargeAddress(lang: Lang): string {
+  if(lang === 'ru') return 'Recharge Payment';
+  if(lang === 'es') return 'Recharge Payment';
+  return 'Recharge Payment';
 }
 
 
