@@ -20,9 +20,9 @@ export function labelDonation(lang: Lang): string {
 }
 
 export function labelRechargeAddress(lang: Lang): string {
-  if(lang === 'ru') return 'Recharge Payment';
-  if(lang === 'es') return 'Recharge Payment';
-  return 'Recharge Payment';
+  if(lang === 'ru') return 'Recharge';
+  if(lang === 'es') return 'Recharge';
+  return 'Recharge';
 }
 
 
