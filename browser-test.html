@@ -93,5 +93,24 @@
     })
   </script>
 
+
+  <h3 class="next">Open Subscription Widget by SDK</h3>
+  <div id="smartypay-new-sub"></div>
+  <button id="openSubWidget">Open subscription widget</button>
+  <script>
+
+    const subSdk = new SmartyPaySubscriptions();
+
+    document.getElementById('openSubWidget').addEventListener('click', ()=>{
+      subSdk.newSubscriptionWidget({
+        sessionId: 'Place Session Id',
+        planId: 'Place plan id',
+        target: 'smartypay-new-sub'
+      })
+    });
+  </script>
+
+  <br/><br/><br/><br/><br/><br/><br/><br/>
+
   </body>
 </html>

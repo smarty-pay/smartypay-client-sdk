@@ -1,4 +1,4 @@
-import {makeElem} from './util';
+import {makeElem} from '../util';
 
 
 export interface IFrameDialogProps {
@@ -15,7 +15,7 @@ export function initIFrameDialog(
     frameUrl,
     root,
     onClose,
-  }:IFrameDialogProps
+  }: IFrameDialogProps
 ){
 
   const iframeParent = makeElem('<div class="iframe-container"></div>');

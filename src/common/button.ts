@@ -3,10 +3,10 @@
  * @author Evgeny Dolganov <evgenij.dolganov@gmail.com>
  */
 
-import {makeElem, makeStyleElement} from './util';
-import svg from './assets/icon.svg';
-import css from './assets/style.css';
-import {Theme} from './model/theme';
+import {makeElem} from '../util';
+import svg from '../assets/icon.svg';
+import {Theme} from '../model/theme';
+import {attachShadowToParent} from './layout';
 
 export interface MakeButtonReq {
   owner: string,
@@ -55,8 +55,7 @@ export function initButton(
   }
 
 
-  const root = elem.attachShadow({mode: 'closed'});
-  root.appendChild(makeStyleElement(css));
+  const root = attachShadowToParent(elem);
   root.appendChild(button);
 
   if( errorElem){

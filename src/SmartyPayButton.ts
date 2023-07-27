@@ -9,7 +9,7 @@ import {Theme} from './model/theme';
 import {labelPay, makeErrorParam, tokenLabel} from './i18n';
 import {CustomFontSupport} from './model/font';
 import {initFontByClass} from './util/font';
-import {initButton} from './button';
+import {initButton} from './common/button';
 
 export interface SmartyPayButtonProps extends CustomFontSupport {
   target: string | undefined,

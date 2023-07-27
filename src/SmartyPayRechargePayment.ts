@@ -8,8 +8,8 @@ import {initFontByClass} from './util/font';
 import {Theme} from './model/theme';
 import {parseLang} from './model/lang';
 import {labelRechargeAddress, makeErrorParam} from './i18n';
-import {initButton} from './button';
-import {initIFrameDialog} from './iframe-dialog';
+import {initButton} from './common/button';
+import {initIFrameDialog} from './common/iframe-dialog';
 
 export interface SmartyPayRechargePaymentProps extends CustomFontSupport {
   target: string | undefined,
