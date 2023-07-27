@@ -63,7 +63,7 @@ export function newSubscriptionAppUrl(): string {
   }
 
   if(parentHost.includes('ncps-ui.dev.')){
-    return 'https://ncps-subs-widget.dev.mnxsc.tech/';
+    return 'https://ncps-subs-widget.dev.mnxsc.tech';
   }
 
   if(parentHost.includes('ncps-ui.staging.')){
