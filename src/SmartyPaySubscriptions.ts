@@ -1,11 +1,18 @@
+/**
+ * SMARTy Pay Client SDK
+ * @author Evgeny Dolganov <evgenij.dolganov@gmail.com>
+ */
+
 import {attachShadowToParent} from './common/layout';
 import {initIFrameDialog} from './common/iframe-dialog';
+import { Lang } from "./model/lang";
 
 
 export interface OpenPlanWidgetReq {
   target: string,
   planId: string,
   sessionId: string,
+  lang?: Lang,
 }
 
 export class SmartyPaySubscriptions {
@@ -17,7 +24,8 @@ export class SmartyPaySubscriptions {
     {
       target,
       planId,
-      sessionId
+      sessionId,
+      lang,
     }: OpenPlanWidgetReq
   ): boolean {
 
@@ -36,8 +44,16 @@ export class SmartyPaySubscriptions {
     const root = (parentElem as any).smartyRoot || attachShadowToParent(parentElem);
     (parentElem as any).smartyRoot = root;
 
+    const urlParams = new URLSearchParams();
+    urlParams.set('plan', planId);
+    urlParams.set('session', sessionId);
+    urlParams.set('frame-mode', 'true');
+    if(lang){
+      urlParams.set('lang', lang);
+    }
+
     const frameOrigin = newSubscriptionAppUrl();
-    const frameUrl = `${frameOrigin}/?plan=${planId}&session=${sessionId}&frame-mode=true`;
+    const frameUrl = `${frameOrigin}/?${urlParams.toString()}`;
 
     initIFrameDialog({
       frameOrigin,
