@@ -13,6 +13,7 @@ export interface OpenPlanWidgetReq {
   planId: string,
   sessionId: string,
   lang?: Lang,
+  demoMode?: boolean,
 }
 
 export class SmartyPaySubscriptions {
@@ -26,6 +27,7 @@ export class SmartyPaySubscriptions {
       planId,
       sessionId,
       lang,
+      demoMode,
     }: OpenPlanWidgetReq
   ): boolean {
 
@@ -50,6 +52,9 @@ export class SmartyPaySubscriptions {
     urlParams.set('frame-mode', 'true');
     if(lang){
       urlParams.set('lang', lang);
+    }
+    if(demoMode){
+      urlParams.set('demo-mode', 'true');
     }
 
     const frameOrigin = newSubscriptionAppUrl();
