@@ -8,12 +8,18 @@ import {initIFrameDialog} from './common/iframe-dialog';
 import { Lang } from "./model/lang";
 
 
+export const SmartyPaySubscriptionsEventKeys = [
+  'subscription-created',
+  'close'
+];
+
 export interface OpenPlanWidgetReq {
   target: string,
   planId: string,
   sessionId: string,
   lang?: Lang,
   demoMode?: boolean,
+  onEvent?: (event: string)=>void,
 }
 
 export class SmartyPaySubscriptions {
@@ -28,6 +34,7 @@ export class SmartyPaySubscriptions {
       sessionId,
       lang,
       demoMode,
+      onEvent,
     }: OpenPlanWidgetReq
   ): boolean {
 
@@ -66,6 +73,13 @@ export class SmartyPaySubscriptions {
       root: root,
       onClose: ()=>{
         this.inDialog = false;
+      },
+      onEvent: (event)=>{
+        if(SmartyPaySubscriptionsEventKeys.includes(event)){
+          onEvent?.(event);
+        } else {
+          console.info('unknown event from dialog:', event);
+        }
       }
     });
 

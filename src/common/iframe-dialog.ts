@@ -6,6 +6,7 @@ export interface IFrameDialogProps {
   frameUrl: string,
   root: ShadowRoot,
   onClose: ()=>void,
+  onEvent?: (event: string)=>void,
 }
 
 
@@ -15,6 +16,7 @@ export function initIFrameDialog(
     frameUrl,
     root,
     onClose,
+    onEvent,
   }: IFrameDialogProps
 ){
 
@@ -43,8 +45,13 @@ export function initIFrameDialog(
 
     const {type, value} = event.data || {};
 
-    if(type === 'smartypay-event' && value === 'close'){
-      closeDialog();
+    if(type === 'smartypay-event'){
+
+      onEvent?.(value);
+
+      if(value === 'close'){
+        closeDialog();
+      }
     }
   }
   window.addEventListener("message", onFrameEvent);
