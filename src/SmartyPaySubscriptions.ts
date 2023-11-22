@@ -22,10 +22,17 @@ export interface OpenPlanWidgetReq {
   onEvent?: (event: string)=>void,
 }
 
+export interface EditSubscriptionUrlReq {
+  sessionId: string,
+  backUrl?: string,
+  lang?: Lang,
+  demoMode?: boolean,
+  targetTags?: string,
+}
+
 export class SmartyPaySubscriptions {
 
   private inDialog = false;
-  // private roots =
 
   newSubscriptionWidget(
     {
@@ -86,6 +93,34 @@ export class SmartyPaySubscriptions {
     return true;
   }
 
+  editSubscriptionUrl(
+    {
+      sessionId,
+      backUrl,
+      targetTags,
+      lang,
+      demoMode,
+    }: EditSubscriptionUrlReq
+  ) {
+
+    const urlParams = new URLSearchParams();
+    urlParams.set('session', sessionId);
+    if(backUrl){
+      urlParams.set('back-url', backUrl);
+    }
+    if(lang){
+      urlParams.set('lang', lang);
+    }
+    if(demoMode){
+      urlParams.set('demo-mode', 'true');
+    }
+    if(targetTags){
+      urlParams.set('target-tags', targetTags);
+    }
+
+    return `${editSubscriptionUrl()}/?${urlParams.toString()}`;
+  }
+
 }
 
 
@@ -106,4 +141,24 @@ export function newSubscriptionAppUrl(): string {
   }
 
   return 'https://new-subscription.smartypay.io';
+}
+
+
+export function editSubscriptionUrl(): string {
+
+  const parentHost = window.location.hostname;
+
+  if(parentHost === 'localhost'){
+    return 'http://localhost:3000';
+  }
+
+  if(parentHost.includes('ncps-ui.dev.')){
+    return 'https://ncps-ui-subs.dev.mnxsc.tech';
+  }
+
+  if(parentHost.includes('ncps-ui.staging.')){
+    return 'https://ncps-ui-subs.staging.mnxsc.tech';
+  }
+
+  return 'https://subscriptions.smartypay.io';
 }
