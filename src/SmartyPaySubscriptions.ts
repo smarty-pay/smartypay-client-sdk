@@ -72,8 +72,8 @@ export class SmartyPaySubscriptions {
     if(demoMode){
       urlParams.set('demo-mode', 'true');
     }
-    if(darkTheme){
-      urlParams.set('dark-theme', 'true');
+    if(darkTheme !== undefined){
+      urlParams.set('dark-theme', darkTheme? 'true' : 'false');
     }
 
     const frameOrigin = newSubscriptionAppUrl();
