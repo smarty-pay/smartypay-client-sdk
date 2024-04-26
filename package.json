@@ -1,6 +1,6 @@
 {
   "name": "smartypay-client-sdk",
-  "version": "1.2.3",
+  "version": "1.2.4",
   "description": "Simple library for show a custom payment button in any website",
   "author": "Evgeny Dolganov <evgenij.dolganov@gmail.com>",
   "repository": "https://github.com/smarty-pay/smartypay-client-sdk",

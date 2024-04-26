@@ -19,6 +19,7 @@ export interface OpenPlanWidgetReq {
   sessionId: string,
   lang?: Lang,
   demoMode?: boolean,
+  darkTheme?: boolean,
   onEvent?: (event: string)=>void,
 }
 
@@ -42,6 +43,7 @@ export class SmartyPaySubscriptions {
       lang,
       demoMode,
       onEvent,
+      darkTheme,
     }: OpenPlanWidgetReq
   ): boolean {
 
@@ -69,6 +71,9 @@ export class SmartyPaySubscriptions {
     }
     if(demoMode){
       urlParams.set('demo-mode', 'true');
+    }
+    if(darkTheme){
+      urlParams.set('dark-theme', 'true');
     }
 
     const frameOrigin = newSubscriptionAppUrl();
