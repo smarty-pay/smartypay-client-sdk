@@ -1,31 +1,19 @@
-import {makeElem} from '../util';
-
+import { makeElem } from '../util';
 
 export interface IFrameDialogProps {
-  frameOrigin: string,
-  frameUrl: string,
-  root: ShadowRoot,
-  onClose: ()=>void,
-  onEvent?: (event: string)=>void,
+  frameOrigin: string;
+  frameUrl: string;
+  root: ShadowRoot;
+  onClose: () => void;
+  onEvent?: (event: string) => void;
 }
 
-
-export function initIFrameDialog(
-  {
-    frameOrigin,
-    frameUrl,
-    root,
-    onClose,
-    onEvent,
-  }: IFrameDialogProps
-){
-
+export function initIFrameDialog({ frameOrigin, frameUrl, root, onClose, onEvent }: IFrameDialogProps) {
   const iframeParent = makeElem('<div class="iframe-container"></div>');
   const iframe = makeElem(`<iframe class="frame" src="${frameUrl}" scrolling="0" frameborder="0"></iframe>`);
 
   iframeParent.appendChild(iframe);
   root.appendChild(iframeParent);
-
 
   // close events
   const onEsc = (event: KeyboardEvent) => {
@@ -35,36 +23,30 @@ export function initIFrameDialog(
   };
   document.addEventListener('keydown', onEsc);
 
-
   // iframe events
   const onFrameEvent = (event: MessageEvent) => {
-
-    if( event.origin !== frameOrigin){
+    if (event.origin !== frameOrigin) {
       return;
     }
 
-    const {type, value} = event.data || {};
+    const { type, value } = event.data || {};
 
-    if(type === 'smartypay-event'){
-
+    if (type === 'smartypay-event') {
       onEvent?.(value);
 
-      if(value === 'close'){
+      if (value === 'close') {
         closeDialog();
       }
     }
-  }
-  window.addEventListener("message", onFrameEvent);
-
+  };
+  window.addEventListener('message', onFrameEvent);
 
   // close logic
   const closeDialog = () => {
-
     document.removeEventListener('keydown', onEsc);
-    window.removeEventListener("message", onFrameEvent);
+    window.removeEventListener('message', onFrameEvent);
 
     root.removeChild(iframeParent);
     onClose();
-  }
-
+  };
 }

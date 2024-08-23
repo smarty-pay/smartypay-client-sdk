@@ -48,7 +48,7 @@ new SmartyPayButton({
 - **target** - element id
 - **apiKey** - you can get it here: https://dashboard.smartypay.io/
 - **token** - see valid tokens here: https://docs.smartypay.io/general/supported-tokens
-- **amount** - amount for invoice (example 0.99)
+- **amount** - amount for payment (example 0.99)
 - **lang** - `en` by default (also has `es`, `ru`)
 - **theme** - `light` (default) or `dark`
 

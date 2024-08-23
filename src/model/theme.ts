@@ -3,4 +3,4 @@
  * @author Evgeny Dolganov <evgenij.dolganov@gmail.com>
  */
 
-export type Theme = 'light' | 'dark'
+export type Theme = 'light' | 'dark';

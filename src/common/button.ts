@@ -3,43 +3,42 @@
  * @author Evgeny Dolganov <evgenij.dolganov@gmail.com>
  */
 
-import {makeElem} from '../util';
 import svg from '../assets/icon.svg';
-import {Theme} from '../model/theme';
-import {attachShadowToParent} from './layout';
+import { makeElem } from '../util';
+
+import { attachShadowToParent } from './layout';
+
+import type { Theme } from '../model/theme';
 
 export interface MakeButtonReq {
-  owner: string,
-  target?: string,
-  theme?: Theme,
-  errorElem?: HTMLElement,
-  buttonText: string,
-  onClick?: ()=>void,
+  owner: string;
+  target?: string;
+  theme?: Theme;
+  errorElem?: HTMLElement;
+  buttonText: string;
+  onClick?: () => void;
 }
 
 export interface MakeButtonResp {
-  root: ShadowRoot,
-  button: HTMLButtonElement,
+  root: ShadowRoot;
+  button: HTMLButtonElement;
 }
 
-export function initButton(
-  {
-    owner,
-    target,
-    theme,
-    errorElem,
-    buttonText,
-    onClick,
-  }: MakeButtonReq
-): MakeButtonResp | undefined {
-
-  if( ! target){
+export function initButton({
+  owner,
+  target,
+  theme,
+  errorElem,
+  buttonText,
+  onClick,
+}: MakeButtonReq): MakeButtonResp | undefined {
+  if (!target) {
     console.warn(`cannot find target to render ${owner}`);
     return undefined;
   }
 
   const elem = document.getElementById(target);
-  if( ! elem){
+  if (!elem) {
     console.warn(`cannot find element to render ${owner}`, target);
     return undefined;
   }
@@ -50,31 +49,27 @@ export function initButton(
   button.appendChild(makeElem(`<span>${buttonText}</span>`));
   button.appendChild(makeElem(`<span></span>`));
 
-  if(theme === 'dark'){
+  if (theme === 'dark') {
     button.classList.add('dark');
   }
-
 
   const root = attachShadowToParent(elem);
   root.appendChild(button);
 
-  if( errorElem){
+  if (errorElem) {
     root.appendChild(errorElem);
     disableButton(button);
-  }
-  else {
-
+  } else {
     // prevent multi-click
     let actionId = 0;
 
-    button.addEventListener('click', ()=>{
-
+    button.addEventListener('click', () => {
       actionId = Math.random();
       const curActionId = actionId;
 
       // timeout for visual click
-      setTimeout(()=>{
-        if(curActionId === actionId){
+      setTimeout(() => {
+        if (curActionId === actionId) {
           onClick?.();
         }
       }, 600);
@@ -84,8 +79,7 @@ export function initButton(
   return { root, button };
 }
 
-
-export function disableButton(button: HTMLButtonElement){
+export function disableButton(button: HTMLButtonElement) {
   button.classList.add('disabled');
   button.setAttribute('disabled', 'disabled');
 }

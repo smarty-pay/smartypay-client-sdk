@@ -3,7 +3,6 @@
  * @author Evgeny Dolganov <evgenij.dolganov@gmail.com>
  */
 
-
 export function makeElem(htmlString: string): HTMLElement {
   const div = document.createElement('div');
   div.innerHTML = htmlString.trim();
@@ -11,11 +10,10 @@ export function makeElem(htmlString: string): HTMLElement {
 }
 
 export function makeStyleElement(css: string) {
-  const style = document.createElement('style')
-  style.innerText = css
+  const style = document.createElement('style');
+  style.innerText = css;
   return style;
 }
-
 
 /**
  * sends a request to the specified url from a form. this will change the window location.
@@ -23,12 +21,7 @@ export function makeStyleElement(css: string) {
  * @param {object} params the parameters to add to the url
  * @param {string} [method=post] the method to use on the form
  */
-export function postForm(
-  path: string,
-  params: Record<string, any>,
-  method='post'
-) {
-
+export function postForm(path: string, params: Record<string, any>, method = 'post') {
   // The rest of this code assumes you are not using a library.
   // It can be made less verbose if you use one.
   const form = document.createElement('form');
