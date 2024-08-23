@@ -1,6 +1,8 @@
 const esbuild = require('esbuild');
-const { dtsPlugin } = require("esbuild-plugin-d.ts");
+// const { dtsPlugin } = require('esbuild-plugin-d.ts');
 const fs = require('fs');
+const util = require('util');
+const exec = util.promisify(require('child_process').exec);
 
 const cssFile = 'src/assets/style.css';
 const cssFileMin = 'src/assets/style.min.css';
@@ -10,12 +12,10 @@ const svgFile = 'src/assets/icon.svg';
 const svgFileMin = 'src/assets/icon.min.svg';
 const svgFileInit = 'src/assets/icon.init.svg';
 
-const VERSION = 'v1'
+const VERSION = 'v1';
 
-async function build(){
-
+async function build() {
   try {
-
     // minify svg
     fs.writeFileSync(svgFileMin, fs.readFileSync(svgFile, 'utf-8').split('\n').join(''));
     fs.renameSync(svgFile, svgFileInit);
@@ -60,24 +60,30 @@ async function build(){
         '.css': 'text',
         '.svg': 'text',
       },
-      plugins: [
-        dtsPlugin()
-      ]
+      // plugins: [dtsPlugin()], // broken by typescript 5, see next code-block
     });
 
-  } finally {
+    // make d.ts files
+    // old solution with "dtsPlugin()" is not working because of entryPoints, only full mode working now
+    await exec('npx tsc  --declaration --emitDeclarationOnly');
 
+    // remove stub entry point for declarations
+    const stubDeclarationEntryFiel = 'dist/tsc/global.d.ts';
+    if (fs.existsSync(stubDeclarationEntryFiel)) {
+      fs.unlinkSync(stubDeclarationEntryFiel);
+    }
+  } finally {
     // replace svg back
-    if(fs.existsSync(svgFileInit)){
-      if(fs.existsSync(svgFile)){
+    if (fs.existsSync(svgFileInit)) {
+      if (fs.existsSync(svgFile)) {
         fs.unlinkSync(svgFile);
       }
       fs.renameSync(svgFileInit, svgFile);
     }
 
     // replace css back
-    if(fs.existsSync(cssFileInit)){
-      if(fs.existsSync(cssFile)){
+    if (fs.existsSync(cssFileInit)) {
+      if (fs.existsSync(cssFile)) {
         fs.unlinkSync(cssFile);
       }
       fs.renameSync(cssFileInit, cssFile);
@@ -85,6 +91,7 @@ async function build(){
   }
 }
 
-
-build().catch(() => process.exit(1));
-
+build().catch((e) => {
+  console.error('build error', e);
+  process.exit(1);
+});
