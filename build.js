@@ -1,6 +1,8 @@
 const esbuild = require('esbuild');
-const { dtsPlugin } = require('esbuild-plugin-d.ts');
+// const { dtsPlugin } = require('esbuild-plugin-d.ts');
 const fs = require('fs');
+const util = require('util');
+const exec = util.promisify(require('child_process').exec);
 
 const cssFile = 'src/assets/style.css';
 const cssFileMin = 'src/assets/style.min.css';
@@ -58,8 +60,18 @@ async function build() {
         '.css': 'text',
         '.svg': 'text',
       },
-      plugins: [dtsPlugin()],
+      // plugins: [dtsPlugin()], // broken by typescript 5, see next code-block
     });
+
+    // make d.ts files
+    // old solution with "dtsPlugin()" is not working because of entryPoints, only full mode working now
+    await exec('npx tsc  --declaration --emitDeclarationOnly');
+
+    // remove stub entry point for declarations
+    const stubDeclarationEntryFiel = 'dist/tsc/global.d.ts';
+    if (fs.existsSync(stubDeclarationEntryFiel)) {
+      fs.unlinkSync(stubDeclarationEntryFiel);
+    }
   } finally {
     // replace svg back
     if (fs.existsSync(svgFileInit)) {
