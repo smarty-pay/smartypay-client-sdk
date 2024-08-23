@@ -1,5 +1,5 @@
 const esbuild = require('esbuild');
-const { dtsPlugin } = require("esbuild-plugin-d.ts");
+const { dtsPlugin } = require('esbuild-plugin-d.ts');
 const fs = require('fs');
 
 const cssFile = 'src/assets/style.css';
@@ -10,12 +10,10 @@ const svgFile = 'src/assets/icon.svg';
 const svgFileMin = 'src/assets/icon.min.svg';
 const svgFileInit = 'src/assets/icon.init.svg';
 
-const VERSION = 'v1'
+const VERSION = 'v1';
 
-async function build(){
-
+async function build() {
   try {
-
     // minify svg
     fs.writeFileSync(svgFileMin, fs.readFileSync(svgFile, 'utf-8').split('\n').join(''));
     fs.renameSync(svgFile, svgFileInit);
@@ -60,24 +58,20 @@ async function build(){
         '.css': 'text',
         '.svg': 'text',
       },
-      plugins: [
-        dtsPlugin()
-      ]
+      plugins: [dtsPlugin()],
     });
-
   } finally {
-
     // replace svg back
-    if(fs.existsSync(svgFileInit)){
-      if(fs.existsSync(svgFile)){
+    if (fs.existsSync(svgFileInit)) {
+      if (fs.existsSync(svgFile)) {
         fs.unlinkSync(svgFile);
       }
       fs.renameSync(svgFileInit, svgFile);
     }
 
     // replace css back
-    if(fs.existsSync(cssFileInit)){
-      if(fs.existsSync(cssFile)){
+    if (fs.existsSync(cssFileInit)) {
+      if (fs.existsSync(cssFile)) {
         fs.unlinkSync(cssFile);
       }
       fs.renameSync(cssFileInit, cssFile);
@@ -85,6 +79,7 @@ async function build(){
   }
 }
 
-
-build().catch(() => process.exit(1));
-
+build().catch((e) => {
+  console.error('build error', e);
+  process.exit(1);
+});
