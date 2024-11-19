@@ -1,5 +1,5 @@
 /**
- * SMARTy Pay Client SDK
+ * Smarty Pay Client SDK
  * @author Evgeny Dolganov <evgenij.dolganov@gmail.com>
  */
 import { disableButton } from './common/button';

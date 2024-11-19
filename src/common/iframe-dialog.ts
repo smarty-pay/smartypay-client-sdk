@@ -1,3 +1,8 @@
+/**
+ * Smarty Pay Client SDK
+ * @author Evgeny Dolganov <evgenij.dolganov@gmail.com>
+ */
+
 import { makeElem } from '../util';
 
 export interface IFrameDialogProps {
